@@ -1,0 +1,40 @@
+drop table test_cidr6\p\g
+
+CREATE TABLE test_cidr6 (
+  prefix CIDR6,
+  descr CHAR(40)
+) \g
+
+
+#
+# Dumping data for table 'test_cidr6'
+#
+
+INSERT INTO test_cidr6  VALUES ('2405:8800::/32','AS7496 Allocation 1')\p\g
+
+INSERT INTO test_cidr6  VALUES ('2405:8800:0::/48','Infrastructure')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::/64','Loopbacks')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::1/128','br1.wic')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::2/128','br2.wic')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::3/128','br3.wic')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::4/128','br1.bne3')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::5/128','br2.bne3')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::6/128','br1.syd1')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::7/128','br2.syd1')\p\g
+
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:1::/64','p2p links')\p\g
+
+INSERT INTO test_cidr6  VALUES ('2405:8800:1::/48','WIC Datacenter')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:1:0::/64','Customer 1')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:1:1::/64','Customer 2')\p\g
+INSERT INTO test_cidr6  VALUES ('2405:8800:1:2::/64','Customer 3')\p\g
+
+INSERT INTO test_cidr6  VALUES ('2405:8800:2::/48','BNE3 Datacenter')\p\g
+
+INSERT INTO test_cidr6  VALUES ('2405:8800:3::/48','SYD1 Datacenter')\p\g
+
+
+select * from test_cidr6 where prefix <= '2405:8800:1::/48' \p\g
+
+select * from test_cidr6 where prefix >= '2405:8800:1::/48' \p\g
+

@@ -1,0 +1,456 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     ->     -> 
+Query buffer
+------------
+
+select * from staff
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | David      | Hughes     | ProdDev    | 1        | 1.82         |
+ | Fred       | Smith      | Admin      | 2        | 2.12         |
+ | Bill       | Jones      | Finance    | 3        | 2.1          |
+ | Mike       | Horn       | Marketing  | 5        | 1.999        |
+ | Tom        | Hanks      | Sales      | 4        | 2            |
+ | John       | Eales      | Sport      | -5       | 2.23         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select last_name, staff_id, height from staff
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------+--------------+
+ | last_name  | staff_id | height       |
+ +------------+----------+--------------+
+ | Hughes     | 1        | 1.82         |
+ | Smith      | 2        | 2.12         |
+ | Jones      | 3        | 2.1          |
+ | Horn       | 5        | 1.999        |
+ | Hanks      | 4        | 2            |
+ | Eales      | -5       | 2.23         |
+ +------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from staff where height > 2
+[continue]
+    -> 
+Query OK.  3 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | Fred       | Smith      | Admin      | 2        | 2.12         |
+ | Bill       | Jones      | Finance    | 3        | 2.1          |
+ | John       | Eales      | Sport      | -5       | 2.23         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select staff_id, address from contact
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +----------+----------------------+
+ | staff_id | address              |
+ +----------+----------------------+
+ | 1        | 3 Foo Street, Some Place Near the Beach, Qld, Australia|
+ | 2        | 5 Baa Place, Some Place Out Back, Qld, Australia|
+ | 5        | Trailer 16, Main Beach Caravan Park, Qld, Australia|
+ | 4        | 9/225 O'Keafe Street, Near the Office, Qld, Australia|
+ | 3        | Right Here!          |
+ +----------+----------------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from pay where pay_time > '09:00:00' 
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 1        | 01-Jan-1997 | 12:00:00 | 1000.00    |
+ | 1        | 01-Feb-1997 | 12:00:00 | 1000.00    |
+ | 1        | 01-Mar-1997 | 12:00:00 | 1000.00    |
+ | 3        | 01-Mar-1997 | 12:30:00 | 750.00     |
+ | 3        | 19-Jun-1996 | 10:45:00 | 3.00       |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from pay where pay_date < '01-Mar-1997' 
+[continue]
+    -> 
+Query OK.  7 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 3        | 16-Oct-1991 | 08:30:00 | 25.00      |
+ | 3        | 27-Dec-1992 | 08:30:00 | 15.00      |
+ | 3        | 19-Jun-1996 | 10:45:00 | 3.00       |
+ | 1        | 01-Jan-1997 | 12:00:00 | 1000.00    |
+ | 2        | 15-Jan-1997 | 08:30:00 | 750.00     |
+ | 1        | 01-Feb-1997 | 12:00:00 | 1000.00    |
+ | 2        | 15-Feb-1997 | 08:30:00 | 750.00     |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from pay where pay_amount > 100 and pay_amount < 900 
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 2        | 15-Jan-1997 | 08:30:00 | 750.00     |
+ | 2        | 15-Feb-1997 | 08:30:00 | 750.00     |
+ | 2        | 15-Mar-1997 | 08:30:00 | 750.00     |
+ | 3        | 01-Mar-1997 | 12:30:00 | 750.00     |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+select * from staff where staff_id = 2
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | Fred       | Smith      | Admin      | 2        | 2.12         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from staff where staff_id = 5 and height = 1.999
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | Mike       | Horn       | Marketing  | 5        | 1.999        |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from staff where first_name = 'Bill' and last_name = 'Jones'
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | Bill       | Jones      | Finance    | 3        | 2.1          |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from staff where first_name = 'Fred' and dept = 'Admin' and
+	last_name = 'Smith'
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | Fred       | Smith      | Admin      | 2        | 2.12         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from pay where pay_date = '1-mar-1997'
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 1        | 01-Mar-1997 | 12:00:00 | 1000.00    |
+ | 3        | 01-Mar-1997 | 12:30:00 | 750.00     |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from pay where pay_time = '8:30:00'
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 2        | 15-Jan-1997 | 08:30:00 | 750.00     |
+ | 2        | 15-Feb-1997 | 08:30:00 | 750.00     |
+ | 2        | 15-Mar-1997 | 08:30:00 | 750.00     |
+ | 3        | 16-Oct-1991 | 08:30:00 | 25.00      |
+ | 3        | 27-Dec-1992 | 08:30:00 | 15.00      |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from pay where pay_date = '15-Feb-1997' and pay_time = '8:30:00'
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 2        | 15-Feb-1997 | 08:30:00 | 750.00     |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+select * from staff where first_name > last_name 
+[continue]
+    -> 
+Query OK.  3 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | Mike       | Horn       | Marketing  | 5        | 1.999        |
+ | Tom        | Hanks      | Sales      | 4        | 2            |
+ | John       | Eales      | Sport      | -5       | 2.23         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from pay where staff_id < pay_amount
+[continue]
+    -> 
+Query OK.  9 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 1        | 01-Jan-1997 | 12:00:00 | 1000.00    |
+ | 1        | 01-Feb-1997 | 12:00:00 | 1000.00    |
+ | 1        | 01-Mar-1997 | 12:00:00 | 1000.00    |
+ | 2        | 15-Jan-1997 | 08:30:00 | 750.00     |
+ | 2        | 15-Feb-1997 | 08:30:00 | 750.00     |
+ | 2        | 15-Mar-1997 | 08:30:00 | 750.00     |
+ | 3        | 16-Oct-1991 | 08:30:00 | 25.00      |
+ | 3        | 27-Dec-1992 | 08:30:00 | 15.00      |
+ | 3        | 01-Mar-1997 | 12:30:00 | 750.00     |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL >     ->     -> 
+Query buffer
+------------
+
+select * from pay where staff_id = pay_amount 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 3        | 19-Jun-1996 | 10:45:00 | 3.00       |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+select * from staff where last_name CLIKE 'hu%'
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | David      | Hughes     | ProdDev    | 1        | 1.82         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from staff where last_name CLIKE 'hu%%'
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | David      | Hughes     | ProdDev    | 1        | 1.82         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from staff where last_name LIKE 'hu%'
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from staff where last_name LIKE 'Hu%'
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | David      | Hughes     | ProdDev    | 1        | 1.82         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from staff where last_name LIKE '%Hu%'
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | David      | Hughes     | ProdDev    | 1        | 1.82         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from staff where last_name RLIKE '[SJ].*'
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | Fred       | Smith      | Admin      | 2        | 2.12         |
+ | Bill       | Jones      | Finance    | 3        | 2.1          |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL >     ->     -> 
+Query buffer
+------------
+
+select * from pay where pay_date LIKE '%Feb%'
+[continue]
+    -> 
+
+ERROR : Invalid date format
+
+
+mSQL > 
+Query buffer
+------------
+select * from pay where pay_amount LIKE '%F%'
+[continue]
+    -> 
+
+ERROR : Bad type for comparison of 'pay_amount'
+
+
+mSQL > 
+Query buffer
+------------
+select * from users where staff_id CLIKE '%F%'
+[continue]
+    -> 
+
+ERROR : Bad type for comparison of 'staff_id'
+
+
+mSQL > 
+Bye!
+

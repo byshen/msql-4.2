@@ -1,0 +1,247 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL > 
+Query buffer
+------------
+drop table test_cidr6
+[continue]
+    -> 
+
+ERROR : Unknown table "test_cidr6"
+
+
+mSQL >     ->     ->     ->     -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+INSERT INTO test_cidr6  VALUES ('2405:8800::/32','AS7496 Allocation 1')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:0::/48','Infrastructure')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::/64','Loopbacks')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::1/128','br1.wic')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::2/128','br2.wic')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::3/128','br3.wic')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::4/128','br1.bne3')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::5/128','br2.bne3')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::6/128','br1.syd1')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:0::7/128','br2.syd1')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:0:1::/64','p2p links')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:1::/48','WIC Datacenter')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:1:0::/64','Customer 1')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:1:1::/64','Customer 2')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:1:2::/64','Customer 3')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:2::/48','BNE3 Datacenter')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+INSERT INTO test_cidr6  VALUES ('2405:8800:3::/48','SYD1 Datacenter')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     ->     -> 
+Query buffer
+------------
+select * from test_cidr6 where prefix <= '2405:8800:1::/48' 
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +---------------------------------------------+------------------------------------------+
+ | prefix                                      | descr                                    |
+ +---------------------------------------------+------------------------------------------+
+ | 2405:8800::/32                              | AS7496 Allocation 1                      |
+ | 2405:8800:1::/48                            | WIC Datacenter                           |
+ +---------------------------------------------+------------------------------------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from test_cidr6 where prefix >= '2405:8800:1::/48' 
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +---------------------------------------------+------------------------------------------+
+ | prefix                                      | descr                                    |
+ +---------------------------------------------+------------------------------------------+
+ | 2405:8800:1::/48                            | WIC Datacenter                           |
+ | 2405:8800:1::/64                            | Customer 1                               |
+ | 2405:8800:1:1::/64                          | Customer 2                               |
+ | 2405:8800:1:2::/64                          | Customer 3                               |
+ +---------------------------------------------+------------------------------------------+
+
+
+
+mSQL >     -> 
+Bye!
+

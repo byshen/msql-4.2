@@ -1,0 +1,17 @@
+#!/bin/sh
+
+INST_DIR=$1
+
+scripts/mkinstalldirs root root 0755    $INST_DIR/bin 
+scripts/mkinstalldirs root root 0755    $INST_DIR/include 
+scripts/mkinstalldirs root root 0755    $INST_DIR/include/common
+scripts/mkinstalldirs root root 0755    $INST_DIR/lib
+scripts/mkinstalldirs daemon root 0755    $INST_DIR/msqldb
+scripts/mkinstalldirs daemon root 0755    $INST_DIR/msqldb/.tmp
+scripts/mkinstalldirs root root 0755    $INST_DIR/doc
+scripts/mkinstalldirs root root 0755    $INST_DIR/www
+scripts/mkinstalldirs root root 0755    $INST_DIR/misc
+scripts/mkinstalldirs root root 0755    $INST_DIR/makegen
+scripts/mkinstalldirs root root 0755    $INST_DIR/modules
+scripts/mkinstalldirs root root 0755    $INST_DIR/etc
+

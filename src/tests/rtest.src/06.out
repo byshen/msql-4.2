@@ -1,0 +1,228 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     -> 
+Query buffer
+------------
+
+select * from staff order by last_name, first_name
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | John       | Eales      | Sport      | -5       | 2.23         |
+ | Tom        | Hanks      | Sales      | 4        | 2            |
+ | Mike       | Horn       | Marketing  | 5        | 1.999        |
+ | David      | Hughes     | ProdDev    | 1        | 1.82         |
+ | Bill       | Jones      | Finance    | 3        | 2.1          |
+ | Fred       | Smith      | Admin      | 2        | 2.12         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from staff order by last_name desc
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | Fred       | Smith      | Admin      | 2        | 2.12         |
+ | Bill       | Jones      | Finance    | 3        | 2.1          |
+ | David      | Hughes     | ProdDev    | 1        | 1.82         |
+ | Mike       | Horn       | Marketing  | 5        | 1.999        |
+ | Tom        | Hanks      | Sales      | 4        | 2            |
+ | John       | Eales      | Sport      | -5       | 2.23         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from staff order by last_name desc, first_name
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------+------------+----------+--------------+
+ | first_name | last_name  | dept       | staff_id | height       |
+ +------------+------------+------------+----------+--------------+
+ | Fred       | Smith      | Admin      | 2        | 2.12         |
+ | Bill       | Jones      | Finance    | 3        | 2.1          |
+ | David      | Hughes     | ProdDev    | 1        | 1.82         |
+ | Mike       | Horn       | Marketing  | 5        | 1.999        |
+ | Tom        | Hanks      | Sales      | 4        | 2            |
+ | John       | Eales      | Sport      | -5       | 2.23         |
+ +------------+------------+------------+----------+--------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from pay order by pay_date
+[continue]
+    -> 
+Query OK.  10 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 3        | 16-Oct-1991 | 08:30:00 | 25.00      |
+ | 3        | 27-Dec-1992 | 08:30:00 | 15.00      |
+ | 3        | 19-Jun-1996 | 10:45:00 | 3.00       |
+ | 1        | 01-Jan-1997 | 12:00:00 | 1000.00    |
+ | 2        | 15-Jan-1997 | 08:30:00 | 750.00     |
+ | 1        | 01-Feb-1997 | 12:00:00 | 1000.00    |
+ | 2        | 15-Feb-1997 | 08:30:00 | 750.00     |
+ | 1        | 01-Mar-1997 | 12:00:00 | 1000.00    |
+ | 3        | 01-Mar-1997 | 12:30:00 | 750.00     |
+ | 2        | 15-Mar-1997 | 08:30:00 | 750.00     |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from pay order by pay_time desc
+[continue]
+    -> 
+Query OK.  10 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 3        | 01-Mar-1997 | 12:30:00 | 750.00     |
+ | 1        | 01-Jan-1997 | 12:00:00 | 1000.00    |
+ | 1        | 01-Mar-1997 | 12:00:00 | 1000.00    |
+ | 1        | 01-Feb-1997 | 12:00:00 | 1000.00    |
+ | 3        | 19-Jun-1996 | 10:45:00 | 3.00       |
+ | 2        | 15-Jan-1997 | 08:30:00 | 750.00     |
+ | 3        | 27-Dec-1992 | 08:30:00 | 15.00      |
+ | 3        | 16-Oct-1991 | 08:30:00 | 25.00      |
+ | 2        | 15-Mar-1997 | 08:30:00 | 750.00     |
+ | 2        | 15-Feb-1997 | 08:30:00 | 750.00     |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from pay order by pay_amount asc, pay_date
+[continue]
+    -> 
+Query OK.  10 row(s) modified or retrieved.
+
+ +----------+-------------+----------+------------+
+ | staff_id | pay_date    | pay_time | pay_amount |
+ +----------+-------------+----------+------------+
+ | 3        | 19-Jun-1996 | 10:45:00 | 3.00       |
+ | 3        | 27-Dec-1992 | 08:30:00 | 15.00      |
+ | 3        | 16-Oct-1991 | 08:30:00 | 25.00      |
+ | 2        | 15-Jan-1997 | 08:30:00 | 750.00     |
+ | 2        | 15-Feb-1997 | 08:30:00 | 750.00     |
+ | 3        | 01-Mar-1997 | 12:30:00 | 750.00     |
+ | 2        | 15-Mar-1997 | 08:30:00 | 750.00     |
+ | 1        | 01-Jan-1997 | 12:00:00 | 1000.00    |
+ | 1        | 01-Feb-1997 | 12:00:00 | 1000.00    |
+ | 1        | 01-Mar-1997 | 12:00:00 | 1000.00    |
+ +----------+-------------+----------+------------+
+
+
+
+mSQL >     ->     ->     ->     -> 
+Query buffer
+------------
+
+select distinct staff_id from pay
+[continue]
+    -> 
+Query OK.  3 row(s) modified or retrieved.
+
+ +----------+
+ | staff_id |
+ +----------+
+ | 1        |
+ | 2        |
+ | 3        |
+ +----------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select distinct staff_id,pay_amount from pay order by staff_id desc
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +----------+------------+
+ | staff_id | pay_amount |
+ +----------+------------+
+ | 3        | 25.00      |
+ | 3        | 3.00       |
+ | 3        | 750.00     |
+ | 3        | 15.00      |
+ | 2        | 750.00     |
+ | 1        | 1000.00    |
+ +----------+------------+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+select _rowid, staff_id, uname from users order by uname
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +----------+----------+-----------------+
+ | _rowid   | staff_id | uname           |
+ +----------+----------+-----------------+
+ | 4        | 1        | bambi           |
+ | 3        | 3        | bill            |
+ | 0        | 2        | fred            |
+ | 2        | 5        | mike            |
+ | 1        | 4        | tom             |
+ +----------+----------+-----------------+
+
+
+
+mSQL >     ->     ->     ->     -> 
+Query buffer
+------------
+
+select _rowid, staff_id, uname from users order by _rowid desc
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +----------+----------+-----------------+
+ | _rowid   | staff_id | uname           |
+ +----------+----------+-----------------+
+ | 4        | 1        | bambi           |
+ | 3        | 3        | bill            |
+ | 2        | 5        | mike            |
+ | 1        | 4        | tom             |
+ | 0        | 2        | fred            |
+ +----------+----------+-----------------+
+
+
+
+mSQL > 
+Bye!
+

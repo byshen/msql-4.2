@@ -1,0 +1,56 @@
+<!
+	/*
+	** This page checks that your web server passes the HTTP
+	** authorization information to CGI programs.  Copy this file
+	** to your web document tree and load it into a browser using
+	**
+	** 	/cgi-bin/w3-msql/check-www-auth.msql
+	**
+	** You will be prompted for a username and password.  Enter
+	** any values you like and you should be presented with a page
+	** telling you what you entered and that everything worked OK.
+	** If you continue to be prompted for your username and password
+	** then the web server is not passing the information through to
+	** the CGI program and you will not be able to use W3-Auth based
+	** access control with this web server.
+	**
+	** If your server doesn't pass this information through, you
+	** could install the Apache web server and use that instead
+	** (it's faster than most other web servers anyway).
+	*/
+
+        $authInfo = httpAuth("  Enter any username and password  ", $auth);
+        $uname = $authInfo[0];
+        $passwd = $authInfo[1];
+>
+
+<HTML>
+<HEAD>
+	<TITLE>HTTPD Auth Info Test Program</TITLE>
+</HEAD>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+
+<CENTER>
+<H2>Web Server Auth Checker</H2>
+</CENTER>
+
+<P><BR>
+Your web server has passed the correct information through to the cgi
+script.
+
+<P>
+<TABLE BRODER=1>
+<TR>
+	<TD><B>Username</B></TD>
+	<TD WIDTH=10></TD>
+	<TD>$uname</TD>
+</TR>
+<TR>
+	<TD><B>Password</B></TD>
+	<TD></TD>
+	<TD>$passwd</TD>
+</TR>
+</TABLE>
+
+<P>
+You can use W3-Auth based access control with this web server.

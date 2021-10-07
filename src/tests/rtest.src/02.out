@@ -1,0 +1,411 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     ->     -> 
+Query buffer
+------------
+
+
+create index idx1 on staff (first_name, last_name)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create index idx2 on staff (dept)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create index idx3 on staff (height, dept)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create unique index idx4 on staff (staff_id)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create unique index idx5 on staff (first_name, last_name, dept)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+create unique index idx1 on contact (staff_id)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     ->     ->     ->     -> 
+Query buffer
+------------
+
+insert into users values (1, 'bambi')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into users values (2, 'fred')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into users values (3, 'bill')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into users values (4, 'tom')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into users values (3, 'mike')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+create unique index idx1 on users (staff_id)
+[continue]
+    -> 
+
+ERROR : Non unique value for unique index
+
+
+mSQL > 
+Query buffer
+------------
+create index idx2 on users (uname)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create index idx3 on users (uname, staff_id)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+create index idx1 on pay (staff_id, pay_amount)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create unique index idx2 on pay (staff_id, pay_date, pay_amount)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create index idx3 on pay (pay_date)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create index idx4 on pay (pay_date, pay_time)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+drop index idx1 from users
+[continue]
+    -> 
+
+ERROR : Unknown index 'idx1' for 'users'
+
+
+mSQL > 
+Query buffer
+------------
+drop index idx2 from users
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+drop index idx3 from users
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+delete from users 
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+
+
+
+mSQL >     ->     ->     ->     -> 
+Query buffer
+------------
+
+insert into users values (1, 'bambi')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into users values (3, 'bill')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into users values (5, 'mike')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into users values (4, 'tom')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into users values (2, 'fred')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+create unique index idx1 on users (staff_id)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create index idx2 on users (uname)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create index idx3 on users (uname, staff_id)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create index idx1 on pay (pay_date)
+[continue]
+    -> 
+
+ERROR : Bad index name 'idx1'
+
+
+mSQL > 
+Query buffer
+------------
+create index idx2 on pay (staff_id)
+[continue]
+    -> 
+
+ERROR : Bad index name 'idx2'
+
+
+mSQL > 
+Query buffer
+------------
+create index idx3 on pay (staff_id, pay_date)
+[continue]
+    -> 
+
+ERROR : Bad index name 'idx3'
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+create index idx1 on users (uname)
+[continue]
+    -> 
+
+ERROR : Bad index name 'idx1'
+
+
+mSQL > 
+Query buffer
+------------
+create index uname on users (staff_id)
+[continue]
+    -> 
+
+ERROR : Bad index name 'uname'
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+create index fail on contact (address)
+[continue]
+    -> 
+
+ERROR : Can't index on a TEXT field!
+
+
+mSQL > 
+Query buffer
+------------
+create unique index fail on contact (staff_id, address)
+[continue]
+    -> 
+
+ERROR : Can't index on a TEXT field!
+
+
+mSQL > 
+Bye!
+

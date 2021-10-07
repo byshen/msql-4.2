@@ -1,0 +1,7 @@
+
+!object msqlexport.o msqlexport.c
+
+
+!program msqlexport msqlexport.o,../libmsql/libmsql.a
+!install msqlexport $(INST_DIR)/bin/msqlexport 0755
+

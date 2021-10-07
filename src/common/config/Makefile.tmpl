@@ -1,0 +1,9 @@
+
+LOCAL_EXTRA_CFLAGS= -DINST_DIR=\\"$(INST_DIR)\\" $(PIC)
+
+all: config.o
+
+!object config.o config.c
+
+config.o: config.h config_priv.h
+

@@ -1,0 +1,702 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     -> 
+Query buffer
+------------
+
+create table table_int8 (v1 int8)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create table table_uint8 (v1 uint8)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create table table_int16 (v1 int16)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create table table_uint16 (v1 uint16)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+insert into table_int8 values (1)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_int8 values (-1)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_int8 values (127)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_int8 values (128)
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from table_int8
+[continue]
+    -> 
+Query OK.  3 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ | 1    |
+ | -1   |
+ | 127  |
+ +------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int8 where v1 = -1
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ | -1   |
+ +------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int8 where v1 < 0
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ | -1   |
+ +------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int8 where v1 > 0
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ | 1    |
+ | 127  |
+ +------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int8 where v1 = 127
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ | 127  |
+ +------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int8 where v1 > 127
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ +------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+insert into table_uint8 values (1)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_uint8 values (-1)
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_uint8 values (127)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_uint8 values (128)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from table_uint8
+[continue]
+    -> 
+Query OK.  3 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ | 1    |
+ | 127  |
+ | 128  |
+ +------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint8 where v1 = -1
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint8 where v1 < 0
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ +------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint8 where v1 > 0
+[continue]
+    -> 
+Query OK.  3 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ | 1    |
+ | 127  |
+ | 128  |
+ +------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint8 where v1 = 127
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ | 127  |
+ +------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint8 where v1 > 127
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ | 128  |
+ +------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint8 where v1 = 128
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------+
+ | v1   |
+ +------+
+ | 128  |
+ +------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+insert into table_int16 values (1)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_int16 values (-1)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_int16 values (32767)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_int16 values (32768)
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_int16 values (-32767)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_int16 values (-32768)
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from table_int16
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | 1      |
+ | -1     |
+ | 32767  |
+ | -32767 |
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int16 where v1 = -1
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | -1     |
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int16 where v1 < 0
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | -1     |
+ | -32767 |
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int16 where v1 > 0
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | 1      |
+ | 32767  |
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int16 where v1 = 32767
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | 32767  |
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int16 where v1 > 32767
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int16 where v1 = 32768
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int16 where v1 < -32767
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_int16 where v1 = -32767
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | -32767 |
+ +--------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+insert into table_uint16 values (1)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_uint16 values (-1)
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_uint16 values (32767)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into table_uint16 values (32768)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from table_uint16
+[continue]
+    -> 
+Query OK.  3 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | 1      |
+ | 32767  |
+ | 32768  |
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint16 where v1 = -1
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint16 where v1 < 0
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint16 where v1 > 0
+[continue]
+    -> 
+Query OK.  3 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | 1      |
+ | 32767  |
+ | 32768  |
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint16 where v1 = 32767
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | 32767  |
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint16 where v1 > 32767
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | 32768  |
+ +--------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from table_uint16 where v1 = 32768
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +--------+
+ | v1     |
+ +--------+
+ | 32768  |
+ +--------+
+
+
+
+mSQL >     ->     -> 
+Bye!
+

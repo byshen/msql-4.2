@@ -1,0 +1,38 @@
+/* Is  u_int defined in sys/types.h */
+@U_INT@
+
+/* Do we have the bit types */
+@BITTYPES@
+
+/* do we have a isdst struct entry for timezones */
+@HAVE_ISDST@
+
+/* do rlimit work on this target */
+@WORKING_RLIMIT@
+
+/* How do we work out our GMT offset */
+@GMT_OFFSET@
+
+/* do we have sys_err */
+@SYS_ERR@
+
+/* Do we have a working (shared read/write) mmap */
+@MMAP@
+
+/* How many args does msync need */
+@MSYNC@
+
+/* How do we do directory access on this target */
+@DIRENT@
+@DIRECT@
+@SYS_DIR_H@
+
+/* Do we have siglist */
+@SIGLIST@
+
+/* How do we pass a file descriptor using IPC */
+@MSG@
+
+/* How do we do 64 bit ints */
+@HUGE_T@
+@UHUGE_T@

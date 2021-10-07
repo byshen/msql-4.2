@@ -1,0 +1,22 @@
+# Function handling
+
+select first_name, length(first_name) 'Name Length' from staff \p\g
+select first_name, upper(first_name) from staff \p\g
+select first_name, lower(first_name) from staff \p\g
+select first_name, chop(first_name) 'Chopped Name' from staff \p\g
+select first_name, replace(first_name, 'avi', 'iva') from staff \p\g
+select first_name, substr(first_name, 2, 2) from staff \p\g
+select first_name, translate(first_name, 'A-D', 'a-d') from staff \p\g
+select first_name, soundex(first_name) 'Soundex Value' from staff \p\g
+
+select first_name, abs(10) 'Absolute Value' from staff \p\g
+select first_name, abs(-7) 'Absolute Value' from staff \p\g
+select first_name, staff_id, abs(staff_id) 'Absolute StaffID' from staff \p\g
+select first_name, height, ceil(height) from staff \p\g
+select first_name, height, floor(height) from staff \p\g
+select first_name, staff_id, mod(staff_id, 3) from staff \p\g
+select first_name, staff_id, sign(staff_id) from staff \p\g
+select first_name, staff_id, power(staff_id, 2) from staff \p\g
+
+select first_name, last_name, staff_id  into tmp_staff from staff \p\g
+select * from tmp_staff\p\g

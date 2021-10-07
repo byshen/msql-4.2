@@ -1,0 +1,29 @@
+Installation instructions for mSQL 
+---------------------------------- 
+
+A quick outline of the installation process is given below.
+
+
+1.	Unpack the source code.  (you already have as you are reading this)
+
+4.	Run the setup utility (Note: use ./setup to ensure you get the
+	mSQL setup utility and not a system utility).
+
+5.	After setup has completed,  you can edit a couple of default
+	configuration values in src/site.mm if you wish.  If you want to
+	change the installation directory from the default location,
+	edit src/site.mm and redefine the INST_DIR value.
+
+6.	When you are happy with the configuration, type "make all"
+
+7.	If the compilation of mSQL completes properly, type "make install"
+	This will install all the mSQL related files under /opt/msql
+	(or whatever directory you set as the install directory in site.mm) 
+	You may need root access to perform this step.
+
+8.	Edit /opt/msql/msql.conf to see if everything is OK.
+	The only thing you might change in a normal installation is the
+	username of the mSQL_User or the Admin_User.  By default, mSQL is 
+	configured to run as the user 'daemon' with root being the admin
+	user (i.e. the one who can create databases, shutdown the server
+	etc).

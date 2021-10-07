@@ -1,0 +1,38 @@
+#
+# Site specific configuration
+#
+
+
+COMPILER= @CC@ @WALL@
+INST_DIR= /opt/msql
+HAVE_DYNAMIC= -DHAVE_DYNAMIC
+CC_ONLY_FLAGS=
+LINK_ONLY_FLAGS= @LINUX_DYNAMIC@
+
+
+#
+# Things below here shouldn't need to be changed
+#
+CC= $(COMPILER) $(CC_ONLY_FLAGS)
+LINK= $(COMPILER) $(LINK_ONLY_FLAGS)
+CPP= @CPP@
+RANLIB= @RANLIB@
+AR= ar
+LN_S= ln -s
+BASE_SOURCE_DIR= $(TOP)
+TARGET= @TARGET@
+YACC= @XYACC@
+PIC= @PIC@
+
+
+# Extra libraries if required
+EXTRA_LIB= @LIBS@
+
+# Any other CFlags required
+EXTRA_CFLAGS= 
+
+# Directory for pid file
+PID_DIR= @PID_DIR@
+
+CFLAGS= -O -I$(TOP)/ $(EXTRA_CFLAGS) $(LOCAL_EXTRA_CFLAGS) -D$(OS_TYPE)
+LDLIBS= $(EXTRA_LIB)

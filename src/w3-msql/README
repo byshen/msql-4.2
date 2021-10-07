@@ -1,0 +1,15 @@
+
+****** PLEASE NOTE ******
+
+Lite and W3-mSQL, the scripting language and web development tool
+released with Mini SQL 2.x is no longer supported.  The language has
+been reimplemented and is now available as a stand-alone package from
+our web site, www.Hughes.com.au
+
+The language is now called Ember.  It is totally compatible with Lite /
+W3-mSQL scripts but is a much better implementation of the language.  It
+is smaller, faster (up to 7 times faster), and more reliable.  It can
+also be embedded in other C applications.  In short, it is a complete
+replacement for Lite / W3-mSQL that is faster and more reliable.
+
+For more information please see the web site.

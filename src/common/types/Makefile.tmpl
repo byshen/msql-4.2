@@ -1,0 +1,19 @@
+LOCAL_EXTRA_CFLAGS= $(PIC)
+
+all: libtypes.a
+
+!library_unix libtypes.a types.c,type_date.c,type_time.c,type_money.c,type_ipv4.c,type_cidr4.c,type_ipv6.c,type_cidr6.c,type_datetime.c,type_millitime.c,type_millidatetime.c
+
+
+types.o: types.h
+type_int64.c: types.h
+type_date.c: types.h
+type_time.c: types.h
+type_money.c: types.h
+type_ipv4.c: types.h
+type_ipv6.c: types.h
+type_cidr4.c: types.h
+type_cidr6.c: types.h
+type_datetime.c: types.h
+type_millitime.c: types.h
+type_millidatetime.c: types.h

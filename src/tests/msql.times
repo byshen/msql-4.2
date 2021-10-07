@@ -1,0 +1,60 @@
+mSQL Killer Test.     Test machine = Linux dev.liveapps.com.au 2.6.32-696.10.1.el6.x86_64 #1 SMP Tue Aug 22 18:51:35 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+	mSQL server version 	4.2 pre2
+------------------------------------------------------------
+
+
+Inserting 1000000 rows into new keyed table gave :-
+	41.78 seconds real time
+
+	Total time = 41.78
+	Average operations per second = 23934
+
+
+
+
+Filling a deleted keyed table with 1000000 rows gave :-
+	39.59 seconds real time
+
+	Total time = 39.59
+	Average operations per second = 25258
+
+
+
+
+Selecting 7500 rows using primary key :-
+	0.61 seconds real time
+
+	Total time = .61
+	Average operations per second = 12295
+
+
+
+
+Inserting 1000000 rows into new flat table gave :-
+	37.76 seconds real time
+
+	Total time = 37.76
+	Average operations per second = 26483
+
+
+
+
+Filling a deleted flat table with 1000000 rows gave :-
+	37.12 seconds real time
+
+	Total time = 37.12
+	Average operations per second = 26939
+
+
+
+
+Selecting 20 rows without a key :-
+	1.63 seconds real time
+
+	Total time = 1.63
+	Average operations per second = 4601
+
+
+Total execution time = 158.49
+
+

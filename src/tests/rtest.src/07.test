@@ -1,0 +1,42 @@
+# OK : Simple join
+select staff.first_name, staff.last_name, users.uname from staff, users 
+	where staff.staff_id = users.staff_id \p\g
+
+
+# OK : Simple join with aliases
+select S.first_name, S.last_name, U.uname 
+	from staff=S, users=U
+	where S.staff_id = U.staff_id \p\g
+
+
+# OK : 3 way 
+select staff.first_name, staff.last_name, users.uname, contact.phone
+	from staff, users, contact
+	where staff.staff_id = users.staff_id 
+		and users.staff_id = contact.staff_id\p\g
+
+
+# OK : 3 way with table aliases
+select S.first_name, S.last_name, U.uname, C.phone
+	from staff = S, users = U, contact = C
+	where S.staff_id = U.staff_id and U.staff_id = C.staff_id\p\g
+
+
+
+# OK : Join with sysvar being carried through the result table
+select S._rowid, S.first_name, S.last_name, U.uname, C.phone
+	from staff = S, users = U, contact = C
+	where S.staff_id = U.staff_id and U.staff_id = C.staff_id\p\g
+
+# OK : do some ordering as well
+select S.first_name, S.last_name, U.uname, P.pay_date, P.pay_amount
+	from staff = S, users = U, pay = P
+	where S.staff_id = U.staff_id and U.staff_id = P.staff_id
+	order by S.last_name\p\g
+
+
+# OK : ordering and distinct
+select distinct S.first_name, S.last_name, U.uname, P.pay_amount
+	from staff = S, users = U, pay = P
+	where S.staff_id = U.staff_id and U.staff_id = P.staff_id
+	order by S.last_name\p\g

@@ -1,0 +1,9 @@
+EXTRA_CFLAGS= $(MSG)
+
+all: libcra.a
+
+!library_unix libcra.a cra.c,uidx.c
+
+
+cra.c: cra.h
+uidx.c: uidx.h cra.h

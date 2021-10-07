@@ -1,0 +1,7 @@
+
+!object msqlimport.o msqlimport.c
+
+
+!program msqlimport msqlimport.o,../libmsql/libmsql.a
+!install msqlimport $(INST_DIR)/bin/msqlimport 0755
+

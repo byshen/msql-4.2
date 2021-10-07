@@ -1,0 +1,388 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     ->     ->     ->     ->     -> 
+Query buffer
+------------
+
+create table regex_test (
+	int_val		int,
+	char_val	char(10),
+	text_val	text(10)
+)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+insert into regex_test values (1, 'aaa', 'AAA')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into regex_test values (2, 'bbb', 'BBB')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into regex_test values (3, 'ccc', 'CCC')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into regex_test values (4, 'ddd', 'DDD')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into regex_test values (5, 'eee', 'EEE')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into regex_test values (6, 'fff', 'FFF')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into regex_test values (7, 'ggg', 'GGG')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into regex_test values (8, 'hhh', 'HHH')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into regex_test values (9, 'iii', 'III')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     ->     -> 
+Query buffer
+------------
+
+select * from regex_test where char_val like '_e_' 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ | 5        | eee        | EEE        |
+ +----------+------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from regex_test where char_val like 'e_' 
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ +----------+------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from regex_test where char_val like 'e%' 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ | 5        | eee        | EEE        |
+ +----------+------------+------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from regex_test where char_val rlike '.e.' 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ | 5        | eee        | EEE        |
+ +----------+------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from regex_test where char_val like 'e.' 
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ +----------+------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from regex_test where char_val rlike 'e.*' 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ | 5        | eee        | EEE        |
+ +----------+------------+------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from regex_test where char_val like 'G%' 
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ +----------+------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from regex_test where char_val clike 'G%' 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ | 7        | ggg        | GGG        |
+ +----------+------------+------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from regex_test where char_val slike 'ahh' 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ | 1        | aaa        | AAA        |
+ +----------+------------+------------+
+
+
+
+mSQL >     ->     -> 
+Query buffer
+------------
+
+select * from regex_test where text_val like '_E_' 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ | 5        | eee        | EEE        |
+ +----------+------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from regex_test where text_val like 'E_' 
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ +----------+------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from regex_test where text_val like 'E%' 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ | 5        | eee        | EEE        |
+ +----------+------------+------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from regex_test where text_val rlike '.E.' 
+[continue]
+    -> 
+
+ERROR : Can't use RLIKE or SLIKE with TEXT fields
+
+
+mSQL > 
+Query buffer
+------------
+select * from regex_test where text_val like 'E.' 
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ +----------+------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from regex_test where text_val rlike 'E.*' 
+[continue]
+    -> 
+
+ERROR : Can't use RLIKE or SLIKE with TEXT fields
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from regex_test where text_val like 'g%' 
+[continue]
+    -> 
+Query OK.  0 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ +----------+------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from regex_test where text_val clike 'g%' 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+------------+------------+
+ | int_val  | char_val   | text_val   |
+ +----------+------------+------------+
+ | 7        | ggg        | GGG        |
+ +----------+------------+------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from regex_test where text_val slike 'ahh' 
+[continue]
+    -> 
+
+ERROR : Can't use RLIKE or SLIKE with TEXT fields
+
+
+mSQL >     -> 
+Bye!
+

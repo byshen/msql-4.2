@@ -1,0 +1,12 @@
+# Bulk insert testing
+
+create table bulk_test ( v1 int, v2 char(5), v3 date) \p\g
+
+insert into bulk_test values (1, 'A', '1-Jan-2001'), 
+	(2, 'B', '2-Jan-2001'), (3, 'C', '3-Jan-2001'), 
+	(4, 'D', '4-Jan-2001'), (5, 'E', '5-Jan-2001'), 
+	(6, 'F', '6-Jan-2001'), (7, 'G', '7-Jan-2001'), 
+	(8, 'H', '8-Jan-2001'), (9, 'I', '9-Jan-2001')
+\p\g
+
+select * from bulk_test \p\g

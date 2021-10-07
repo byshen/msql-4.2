@@ -1,0 +1,159 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     -> 
+Query buffer
+------------
+
+create table millidatetime(v1 millidatetime)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create index idx1 on millidatetime(v1)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+INSERT INTO millidatetime  VALUES ('26-Jun-2004 15:16:19.123')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO millidatetime  VALUES ('02-Dec-1999 23:10:00')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO millidatetime  VALUES ('06-Feb-2004 01:01:01.001')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO millidatetime  VALUES ('02-Dec-1999 23:09:50.999')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO millidatetime  VALUES ('25-Jun-2004 11:22:33.555')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO millidatetime  VALUES ('32-Jun-2004 11:22:33.555')
+[continue]
+    -> 
+
+ERROR : Invalid milli-date-time format
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO millidatetime  VALUES ('30-Jun-2004 11:61:33.555')
+[continue]
+    -> 
+
+ERROR : Invalid milli-date-time format
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from millidatetime order by v1
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +--------------------------+
+ | v1                       |
+ +--------------------------+
+ | 02-Dec-1999 23:09:50.999 |
+ | 02-Dec-1999 23:10:00.000 |
+ | 06-Feb-2004 01:01:01.001 |
+ | 25-Jun-2004 11:22:33.555 |
+ | 26-Jun-2004 15:16:19.123 |
+ +--------------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from millidatetime where v1 = '06-Feb-2004 01:01:01.001'
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +--------------------------+
+ | v1                       |
+ +--------------------------+
+ | 06-Feb-2004 01:01:01.001 |
+ +--------------------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from millidatetime where v1 between '01-Jan-1999 00:00:00'
+	and '31-Dec-1999 23:59:59'
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +--------------------------+
+ | v1                       |
+ +--------------------------+
+ | 02-Dec-1999 23:09:50.999 |
+ | 02-Dec-1999 23:10:00.000 |
+ +--------------------------+
+
+
+
+mSQL > 
+Bye!
+

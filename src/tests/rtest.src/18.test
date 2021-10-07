@@ -1,0 +1,65 @@
+#
+# Test the sub-integer types
+#
+
+create table table_int8 (v1 int8)\p\g
+create table table_uint8 (v1 uint8)\p\g
+create table table_int16 (v1 int16)\p\g
+create table table_uint16 (v1 uint16)\p\g
+
+insert into table_int8 values (1)\p\g
+insert into table_int8 values (-1)\p\g
+insert into table_int8 values (127)\p\g
+insert into table_int8 values (128)\p\g
+
+select * from table_int8\p\g
+select * from table_int8 where v1 = -1\p\g
+select * from table_int8 where v1 < 0\p\g
+select * from table_int8 where v1 > 0\p\g
+select * from table_int8 where v1 = 127\p\g
+select * from table_int8 where v1 > 127\p\g
+
+insert into table_uint8 values (1)\p\g
+insert into table_uint8 values (-1)\p\g
+insert into table_uint8 values (127)\p\g
+insert into table_uint8 values (128)\p\g
+
+select * from table_uint8\p\g
+select * from table_uint8 where v1 = -1\p\g
+select * from table_uint8 where v1 < 0\p\g
+select * from table_uint8 where v1 > 0\p\g
+select * from table_uint8 where v1 = 127\p\g
+select * from table_uint8 where v1 > 127\p\g
+select * from table_uint8 where v1 = 128\p\g
+
+insert into table_int16 values (1)\p\g
+insert into table_int16 values (-1)\p\g
+insert into table_int16 values (32767)\p\g
+insert into table_int16 values (32768)\p\g
+insert into table_int16 values (-32767)\p\g
+insert into table_int16 values (-32768)\p\g
+
+select * from table_int16\p\g
+select * from table_int16 where v1 = -1\p\g
+select * from table_int16 where v1 < 0\p\g
+select * from table_int16 where v1 > 0\p\g
+select * from table_int16 where v1 = 32767\p\g
+select * from table_int16 where v1 > 32767\p\g
+select * from table_int16 where v1 = 32768\p\g
+select * from table_int16 where v1 < -32767\p\g
+select * from table_int16 where v1 = -32767\p\g
+
+insert into table_uint16 values (1)\p\g
+insert into table_uint16 values (-1)\p\g
+insert into table_uint16 values (32767)\p\g
+insert into table_uint16 values (32768)\p\g
+
+select * from table_uint16\p\g
+select * from table_uint16 where v1 = -1\p\g
+select * from table_uint16 where v1 < 0\p\g
+select * from table_uint16 where v1 > 0\p\g
+select * from table_uint16 where v1 = 32767\p\g
+select * from table_uint16 where v1 > 32767\p\g
+select * from table_uint16 where v1 = 32768\p\g
+
+

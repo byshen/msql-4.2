@@ -1,0 +1,78 @@
+drop table uint8_test \p\g
+
+create table uint8_test (
+	val uint8,
+	filler char(20)
+)\p\g
+
+create index idx1 on uint8_test (val) \p\g
+
+insert into uint8_test values (10, 'Val 10')\p\g
+insert into uint8_test values (5, 'Val 5')\p\g
+insert into uint8_test values (17, 'Val 17')\p\g
+insert into uint8_test values (200, 'Val 200')\p\g
+insert into uint8_test values (187, 'Val 187')\p\g
+insert into uint8_test values (99, 'Val 99')\p\g
+insert into uint8_test values (76, 'Val 76')\p\g
+insert into uint8_test values (14, 'Val 14')\p\g
+insert into uint8_test values (36, 'Val 36')\p\g
+insert into uint8_test values (2, 'Val 2')\p\g
+insert into uint8_test values (231, 'Val 231')\p\g
+insert into uint8_test values (166, 'Val 166')\p\g
+insert into uint8_test values (129, 'Val 129')\p\g
+insert into uint8_test values (217, 'Val 217')\p\g
+insert into uint8_test values (205, 'Val 205')\p\g
+insert into uint8_test values (201, 'Val 201')\p\g
+insert into uint8_test values (255, 'Val 255')\p\g
+insert into uint8_test values (256, 'Val 256')\p\g
+insert into uint8_test values (-1, 'Val -1')\p\g
+
+select * from uint8_test where val = 99 \p\g
+select * from uint8_test where val < 99 \p\g
+select * from uint8_test where val < 99 order by val desc\p\g
+select * from uint8_test where val >= 200 \p\g
+select * from uint8_test where val >= 200 order by val desc\p\g
+select * from uint8_test where val between 100 and 200 \p\g
+select * from uint8_test where val between 100 and 200 order by val desc\p\g
+
+
+###
+
+drop table uint16_test \p\g
+
+create table uint16_test (
+	val uint16,
+	filler char(20)
+)\p\g
+
+create index idx1 on uint16_test (val) \p\g
+
+insert into uint16_test values (10, 'Val 10')\p\g
+insert into uint16_test values (5, 'Val 5')\p\g
+insert into uint16_test values (17, 'Val 17')\p\g
+insert into uint16_test values (200, 'Val 200')\p\g
+insert into uint16_test values (187, 'Val 187')\p\g
+insert into uint16_test values (99, 'Val 99')\p\g
+insert into uint16_test values (76, 'Val 76')\p\g
+insert into uint16_test values (14, 'Val 14')\p\g
+insert into uint16_test values (36, 'Val 36')\p\g
+insert into uint16_test values (2, 'Val 2')\p\g
+insert into uint16_test values (231, 'Val 231')\p\g
+insert into uint16_test values (166, 'Val 166')\p\g
+insert into uint16_test values (129, 'Val 129')\p\g
+insert into uint16_test values (217, 'Val 217')\p\g
+insert into uint16_test values (205, 'Val 205')\p\g
+insert into uint16_test values (201, 'Val 201')\p\g
+insert into uint16_test values (65535, 'Val 65535')\p\g
+insert into uint16_test values (65536, 'Val 65536')\p\g
+insert into uint16_test values (-1, 'Val -1')\p\g
+
+select * from uint16_test where val = 99 \p\g
+select * from uint16_test where val < 99 \p\g
+select * from uint16_test where val < 99 order by val desc\p\g
+select * from uint16_test where val >= 200 \p\g
+select * from uint16_test where val >= 200 order by val desc\p\g
+select * from uint16_test where val between 100 and 200 \p\g
+select * from uint16_test where val between 100 and 200 order by val desc\p\g
+
+

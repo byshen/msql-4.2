@@ -1,0 +1,17 @@
+#
+# Test the datetime type
+#
+
+create table datetime(v1 datetime)\p\g
+create index idx1 on datetime(v1)\p\g
+
+INSERT INTO datetime  VALUES ('26-Jun-2004 15:16:19')\p\g
+INSERT INTO datetime  VALUES ('02-Dec-1999 23:10:00')\p\g
+INSERT INTO datetime  VALUES ('06-Feb-2004 01:01:01')\p\g
+INSERT INTO datetime  VALUES ('02-Dec-1999 23:09:50')\p\g
+INSERT INTO datetime  VALUES ('25-Jun-2004 11:22:33')\p\g
+
+select * from datetime order by v1\p\g
+select * from datetime where v1 = '06-Feb-2004 01:01:01'\p\g
+select * from datetime where v1 between '01-Jan-1999 00:00:00'
+	and '31-Dec-1999 23:59:59'\p\g

@@ -1,0 +1,169 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     -> 
+Query buffer
+------------
+select staff.first_name, staff.last_name, users.uname from staff, users 
+	where staff.staff_id = users.staff_id 
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +------------+------------+-----------------+
+ | first_name | last_name  | uname           |
+ +------------+------------+-----------------+
+ | David      | Hughes     | bambi           |
+ | Fred       | Smith      | fred            |
+ | Bill       | Jones      | bill            |
+ | Mike       | Horn       | mike            |
+ | Tom        | Hanks      | tom             |
+ +------------+------------+-----------------+
+
+
+
+mSQL >     ->     ->     ->     -> 
+Query buffer
+------------
+select S.first_name, S.last_name, U.uname 
+	from staff=S, users=U
+	where S.staff_id = U.staff_id 
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +------------+------------+-----------------+
+ | first_name | last_name  | uname           |
+ +------------+------------+-----------------+
+ | David      | Hughes     | bambi           |
+ | Fred       | Smith      | fred            |
+ | Bill       | Jones      | bill            |
+ | Mike       | Horn       | mike            |
+ | Tom        | Hanks      | tom             |
+ +------------+------------+-----------------+
+
+
+
+mSQL >     ->     ->     ->     ->     -> 
+Query buffer
+------------
+select staff.first_name, staff.last_name, users.uname, contact.phone
+	from staff, users, contact
+	where staff.staff_id = users.staff_id 
+		and users.staff_id = contact.staff_id
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +------------+------------+-----------------+-----------------+
+ | first_name | last_name  | uname           | phone           |
+ +------------+------------+-----------------+-----------------+
+ | Fred       | Smith      | fred            | (07) 2224 3338  |
+ | Tom        | Hanks      | tom             | (07) 4444 5555  |
+ | Mike       | Horn       | mike            | (07) 5554 6668  |
+ | Bill       | Jones      | bill            | (07) 3333 4444  |
+ | David      | Hughes     | bambi           | (07) 1234 5678  |
+ +------------+------------+-----------------+-----------------+
+
+
+
+mSQL >     ->     ->     ->     -> 
+Query buffer
+------------
+select S.first_name, S.last_name, U.uname, C.phone
+	from staff = S, users = U, contact = C
+	where S.staff_id = U.staff_id and U.staff_id = C.staff_id
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +------------+------------+-----------------+-----------------+
+ | first_name | last_name  | uname           | phone           |
+ +------------+------------+-----------------+-----------------+
+ | Fred       | Smith      | fred            | (07) 2224 3338  |
+ | Tom        | Hanks      | tom             | (07) 4444 5555  |
+ | Mike       | Horn       | mike            | (07) 5554 6668  |
+ | Bill       | Jones      | bill            | (07) 3333 4444  |
+ | David      | Hughes     | bambi           | (07) 1234 5678  |
+ +------------+------------+-----------------+-----------------+
+
+
+
+mSQL >     ->     ->     ->     ->     -> 
+Query buffer
+------------
+select S._rowid, S.first_name, S.last_name, U.uname, C.phone
+	from staff = S, users = U, contact = C
+	where S.staff_id = U.staff_id and U.staff_id = C.staff_id
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +----------+------------+------------+-----------------+-----------------+
+ | _rowid   | first_name | last_name  | uname           | phone           |
+ +----------+------------+------------+-----------------+-----------------+
+ | 1        | Fred       | Smith      | fred            | (07) 2224 3338  |
+ | 4        | Tom        | Hanks      | tom             | (07) 4444 5555  |
+ | 3        | Mike       | Horn       | mike            | (07) 5554 6668  |
+ | 2        | Bill       | Jones      | bill            | (07) 3333 4444  |
+ | 0        | David      | Hughes     | bambi           | (07) 1234 5678  |
+ +----------+------------+------------+-----------------+-----------------+
+
+
+
+mSQL >     ->     ->     ->     -> 
+Query buffer
+------------
+select S.first_name, S.last_name, U.uname, P.pay_date, P.pay_amount
+	from staff = S, users = U, pay = P
+	where S.staff_id = U.staff_id and U.staff_id = P.staff_id
+	order by S.last_name
+[continue]
+    -> 
+Query OK.  10 row(s) modified or retrieved.
+
+ +------------+------------+-----------------+-------------+------------+
+ | first_name | last_name  | uname           | pay_date    | pay_amount |
+ +------------+------------+-----------------+-------------+------------+
+ | David      | Hughes     | bambi           | 01-Jan-1997 | 1000.00    |
+ | David      | Hughes     | bambi           | 01-Mar-1997 | 1000.00    |
+ | David      | Hughes     | bambi           | 01-Feb-1997 | 1000.00    |
+ | Bill       | Jones      | bill            | 16-Oct-1991 | 25.00      |
+ | Bill       | Jones      | bill            | 19-Jun-1996 | 3.00       |
+ | Bill       | Jones      | bill            | 01-Mar-1997 | 750.00     |
+ | Bill       | Jones      | bill            | 27-Dec-1992 | 15.00      |
+ | Fred       | Smith      | fred            | 15-Jan-1997 | 750.00     |
+ | Fred       | Smith      | fred            | 15-Mar-1997 | 750.00     |
+ | Fred       | Smith      | fred            | 15-Feb-1997 | 750.00     |
+ +------------+------------+-----------------+-------------+------------+
+
+
+
+mSQL >     ->     ->     ->     ->     -> 
+Query buffer
+------------
+select distinct S.first_name, S.last_name, U.uname, P.pay_amount
+	from staff = S, users = U, pay = P
+	where S.staff_id = U.staff_id and U.staff_id = P.staff_id
+	order by S.last_name
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------+-----------------+------------+
+ | first_name | last_name  | uname           | pay_amount |
+ +------------+------------+-----------------+------------+
+ | David      | Hughes     | bambi           | 1000.00    |
+ | Bill       | Jones      | bill            | 25.00      |
+ | Bill       | Jones      | bill            | 3.00       |
+ | Bill       | Jones      | bill            | 750.00     |
+ | Bill       | Jones      | bill            | 15.00      |
+ | Fred       | Smith      | fred            | 750.00     |
+ +------------+------------+-----------------+------------+
+
+
+
+mSQL > 
+Bye!
+

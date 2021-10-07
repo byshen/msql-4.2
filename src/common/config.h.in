@@ -1,0 +1,109 @@
+
+#ifndef _CONFIG_H
+#define	_CONFIG_H 1
+
+/* Defined if you have sysconf().  */
+#undef HAVE_SYSCONF
+
+/* Defined if you have strdup().  */
+#undef HAVE_STRDUP
+
+/* Defined if you have rindex(3).  */
+#undef HAVE_RINDEX
+
+/* Defined if you have random() */
+#undef HAVE_RANDOM
+
+/* Defined if you have bcopy(3).  */
+#undef HAVE_BCOPY
+
+/* Defined if you have getdtablesize().  */
+#undef HAVE_GETDTABLESIZE
+
+/* Defined if you have strsignal() rather than sys_siglist[]  */
+#undef HAVE_STRSIGNAL
+
+/* Defined if you have strptime()  */
+#undef HAVE_STRPTIME
+
+/* Defined if you have ftruncate().  */
+#undef HAVE_FTRUNCATE
+
+/* Defined if you have setrlimit().  */
+#undef HAVE_SETRLIMIT
+
+/* Define if you have madvise() */
+#undef HAVE_MADVISE
+
+/* Define if you have strncasecmp() */
+#undef HAVE_STRNCASECMP
+
+/* Define if you have strtoul() */
+#undef HAVE_STRTOUL
+
+/* Define if you have memmove() */
+#undef HAVE_MEMMOVE
+
+/* Define if you have mktemp() */
+#undef HAVE_MKTEMP
+
+/* Define if you have snprintf() */
+#undef HAVE_SNPRINTF
+
+/* Define if you have strerror() */
+#undef HAVE_STRERROR
+
+#undef HAVE_STRING_H
+
+#undef HAVE_STRINGS_H
+
+#undef HAVE_UNISTD_H
+
+#undef HAVE_STDINT_H
+
+#undef HAVE_SYS_TIMEB_H
+
+#undef HAVE_FLOCK
+
+/* Define if you have stdarg.h */
+#undef HAVE_STDARG_H
+
+/* Define if you have sys/sockio.h */
+#undef HAVE_SYS_SOCKIO_H
+
+/* Define if you have sys/mman.h */
+#undef HAVE_SYS_MMAN_H
+
+/* Define if you have dlfcn.h */
+#undef HAVE_DLFCN_H
+
+/* Defined if you have dirent.h */
+#undef HAVE_DIRENT_H
+
+/* Defined if you have netinet/in_systm.h */
+#undef HAVE_NETINT_IN_SYSTM_H
+
+/* Defined if you have arpa/inet.h */
+#undef HAVE_ARPA_INET_H
+
+/* Defined if you have select.h  */
+#undef HAVE_SELECT_H
+
+/* Defined if you have sys/select.h  */
+#undef HAVE_SYS_SELECT_H
+
+/* Defined if you have sys/un.h (SCO doesn't have UNIX sock's) */
+#undef HAVE_SYS_UN_H
+
+/* Defined if you have signal.h */
+#undef HAVE_SIGNAL_H
+
+/* Defined to the type of sig handlers */
+#undef RETSIGTYPE
+
+/* Defined if type size_t is in sys/extras */
+#undef HAVE_SIZE_T
+
+#include "common/config_extras.h"
+
+#endif /*_CONFIG_H*/

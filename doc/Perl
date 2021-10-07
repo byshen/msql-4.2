@@ -1,0 +1,41 @@
+mSQL access from Perl.
+---------------------
+
+The most common perl based interface for accessing an mSQL database is
+using DBI in conjunction with the mSQL DBI module.  To install the
+required components simply follow the instructions below.
+
+NOTE: mSQL 4 is API compatible with mSQL 2 & 3.  This module was designed
+to work with mSQL 2.  It will work perfectly well with mSQL 4 without
+any modification at all.
+
+1. Download the DBI and Msql-Mysql-module files from your local CPAN
+archive.  They are located in the modules/by-module/DBI and
+modules/by-module/Msql directories.
+
+2. Unpack the DBI tar file and compile the code in the usual way (i.e.
+	perl Makefile.PL
+	make
+	make test
+	make install
+
+3. Unpack the mSQL module's tar file  (eg. zcat Msql*tar.gz | tar -xf -)
+
+4. Configure the module and generate the Makefiles by running 
+"perl Makefile.PL".  You will be asked a few configuration questions.
+If you do not want to build mysql support (this module supports both 
+mSQL and mysql) then select option 2 from the menu (mSQL only) for the
+first question.  When asked for your mSQL installation directory, please
+enter /usr/local/msql3 (or where you installed it).
+
+5. Build the software using "make"
+
+6. Ensure that the mSQL server is running and that there is a database
+called test available (eg. msqladmin create test).
+
+7. Test the module using "make test"
+
+8. If all went well the simply run a  "make install"
+
+
+

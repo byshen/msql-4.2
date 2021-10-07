@@ -1,0 +1,67 @@
+#
+# Index creation test
+#
+
+# OK : Create simple and compound indices for all types and combinations
+
+create index idx1 on staff (first_name, last_name)\p\g
+create index idx2 on staff (dept)\p\g
+create index idx3 on staff (height, dept)\p\g
+create unique index idx4 on staff (staff_id)\p\g
+create unique index idx5 on staff (first_name, last_name, dept)\p\g
+
+create unique index idx1 on contact (staff_id)\p\g
+
+
+
+# ERROR : Create bogus data and post-create index
+
+insert into users values (1, 'bambi')\p\g
+insert into users values (2, 'fred')\p\g
+insert into users values (3, 'bill')\p\g
+insert into users values (4, 'tom')\p\g
+insert into users values (3, 'mike')\p\g
+
+create unique index idx1 on users (staff_id)\p\g
+create index idx2 on users (uname)\p\g
+create index idx3 on users (uname, staff_id)\p\g
+
+create index idx1 on pay (staff_id, pay_amount)\p\g
+create unique index idx2 on pay (staff_id, pay_date, pay_amount)\p\g
+create index idx3 on pay (pay_date)\p\g
+create index idx4 on pay (pay_date, pay_time)\p\g
+
+drop index idx1 from users\p\g
+drop index idx2 from users\p\g
+drop index idx3 from users\p\g
+
+delete from users \p\g
+
+
+
+# OK : Create valid data and post-create index
+
+insert into users values (1, 'bambi')\p\g
+insert into users values (3, 'bill')\p\g
+insert into users values (5, 'mike')\p\g
+insert into users values (4, 'tom')\p\g
+insert into users values (2, 'fred')\p\g
+
+create unique index idx1 on users (staff_id)\p\g
+create index idx2 on users (uname)\p\g
+create index idx3 on users (uname, staff_id)\p\g
+create index idx1 on pay (pay_date)\p\g
+create index idx2 on pay (staff_id)\p\g
+create index idx3 on pay (staff_id, pay_date)\p\g
+
+
+# ERROR : index name clash with field and other index
+
+create index idx1 on users (uname)\p\g
+create index uname on users (staff_id)\p\g
+
+
+# ERROR : index on text field
+
+create index fail on contact (address)\p\g
+create unique index fail on contact (staff_id, address)\p\g

@@ -1,0 +1,772 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL > 
+Query buffer
+------------
+drop table uint8_test 
+[continue]
+    -> 
+
+ERROR : Unknown table "uint8_test"
+
+
+mSQL >     ->     ->     ->     -> 
+Query buffer
+------------
+create table uint8_test (
+	val uint8,
+	filler char(20)
+)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+create index idx1 on uint8_test (val) 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+insert into uint8_test values (10, 'Val 10')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (5, 'Val 5')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (17, 'Val 17')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (200, 'Val 200')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (187, 'Val 187')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (99, 'Val 99')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (76, 'Val 76')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (14, 'Val 14')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (36, 'Val 36')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (2, 'Val 2')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (231, 'Val 231')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (166, 'Val 166')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (129, 'Val 129')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (217, 'Val 217')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (205, 'Val 205')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (201, 'Val 201')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (255, 'Val 255')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (256, 'Val 256')
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint8_test values (-1, 'Val -1')
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from uint8_test where val = 99 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------+----------------------+
+ | val  | filler               |
+ +------+----------------------+
+ | 99   | Val 99               |
+ +------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint8_test where val < 99 
+[continue]
+    -> 
+Query OK.  7 row(s) modified or retrieved.
+
+ +------+----------------------+
+ | val  | filler               |
+ +------+----------------------+
+ | 2    | Val 2                |
+ | 5    | Val 5                |
+ | 10   | Val 10               |
+ | 14   | Val 14               |
+ | 17   | Val 17               |
+ | 36   | Val 36               |
+ | 76   | Val 76               |
+ +------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint8_test where val < 99 order by val desc
+[continue]
+    -> 
+Query OK.  7 row(s) modified or retrieved.
+
+ +------+----------------------+
+ | val  | filler               |
+ +------+----------------------+
+ | 76   | Val 76               |
+ | 36   | Val 36               |
+ | 17   | Val 17               |
+ | 14   | Val 14               |
+ | 10   | Val 10               |
+ | 5    | Val 5                |
+ | 2    | Val 2                |
+ +------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint8_test where val >= 200 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------+----------------------+
+ | val  | filler               |
+ +------+----------------------+
+ | 200  | Val 200              |
+ | 201  | Val 201              |
+ | 205  | Val 205              |
+ | 217  | Val 217              |
+ | 231  | Val 231              |
+ | 255  | Val 255              |
+ +------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint8_test where val >= 200 order by val desc
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------+----------------------+
+ | val  | filler               |
+ +------+----------------------+
+ | 255  | Val 255              |
+ | 231  | Val 231              |
+ | 217  | Val 217              |
+ | 205  | Val 205              |
+ | 201  | Val 201              |
+ | 200  | Val 200              |
+ +------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint8_test where val between 100 and 200 
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +------+----------------------+
+ | val  | filler               |
+ +------+----------------------+
+ | 129  | Val 129              |
+ | 166  | Val 166              |
+ | 187  | Val 187              |
+ | 200  | Val 200              |
+ +------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint8_test where val between 100 and 200 order by val desc
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +------+----------------------+
+ | val  | filler               |
+ +------+----------------------+
+ | 200  | Val 200              |
+ | 187  | Val 187              |
+ | 166  | Val 166              |
+ | 129  | Val 129              |
+ +------+----------------------+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+drop table uint16_test 
+[continue]
+    -> 
+
+ERROR : Unknown table "uint16_test"
+
+
+mSQL >     ->     ->     ->     -> 
+Query buffer
+------------
+create table uint16_test (
+	val uint16,
+	filler char(20)
+)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+create index idx1 on uint16_test (val) 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+insert into uint16_test values (10, 'Val 10')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (5, 'Val 5')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (17, 'Val 17')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (200, 'Val 200')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (187, 'Val 187')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (99, 'Val 99')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (76, 'Val 76')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (14, 'Val 14')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (36, 'Val 36')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (2, 'Val 2')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (231, 'Val 231')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (166, 'Val 166')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (129, 'Val 129')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (217, 'Val 217')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (205, 'Val 205')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (201, 'Val 201')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (65535, 'Val 65535')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (65536, 'Val 65536')
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL > 
+Query buffer
+------------
+insert into uint16_test values (-1, 'Val -1')
+[continue]
+    -> 
+
+ERROR : Numeric value outside field value range
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from uint16_test where val = 99 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +--------+----------------------+
+ | val    | filler               |
+ +--------+----------------------+
+ | 99     | Val 99               |
+ +--------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint16_test where val < 99 
+[continue]
+    -> 
+Query OK.  7 row(s) modified or retrieved.
+
+ +--------+----------------------+
+ | val    | filler               |
+ +--------+----------------------+
+ | 2      | Val 2                |
+ | 5      | Val 5                |
+ | 10     | Val 10               |
+ | 14     | Val 14               |
+ | 17     | Val 17               |
+ | 36     | Val 36               |
+ | 76     | Val 76               |
+ +--------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint16_test where val < 99 order by val desc
+[continue]
+    -> 
+Query OK.  7 row(s) modified or retrieved.
+
+ +--------+----------------------+
+ | val    | filler               |
+ +--------+----------------------+
+ | 76     | Val 76               |
+ | 36     | Val 36               |
+ | 17     | Val 17               |
+ | 14     | Val 14               |
+ | 10     | Val 10               |
+ | 5      | Val 5                |
+ | 2      | Val 2                |
+ +--------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint16_test where val >= 200 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +--------+----------------------+
+ | val    | filler               |
+ +--------+----------------------+
+ | 200    | Val 200              |
+ | 201    | Val 201              |
+ | 205    | Val 205              |
+ | 217    | Val 217              |
+ | 231    | Val 231              |
+ | 65535  | Val 65535            |
+ +--------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint16_test where val >= 200 order by val desc
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +--------+----------------------+
+ | val    | filler               |
+ +--------+----------------------+
+ | 65535  | Val 65535            |
+ | 231    | Val 231              |
+ | 217    | Val 217              |
+ | 205    | Val 205              |
+ | 201    | Val 201              |
+ | 200    | Val 200              |
+ +--------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint16_test where val between 100 and 200 
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +--------+----------------------+
+ | val    | filler               |
+ +--------+----------------------+
+ | 129    | Val 129              |
+ | 166    | Val 166              |
+ | 187    | Val 187              |
+ | 200    | Val 200              |
+ +--------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from uint16_test where val between 100 and 200 order by val desc
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +--------+----------------------+
+ | val    | filler               |
+ +--------+----------------------+
+ | 200    | Val 200              |
+ | 187    | Val 187              |
+ | 166    | Val 166              |
+ | 129    | Val 129              |
+ +--------+----------------------+
+
+
+
+mSQL >     ->     -> 
+Bye!
+

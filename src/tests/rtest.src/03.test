@@ -1,0 +1,62 @@
+#
+# Data insertion test
+#
+
+# OK : Catch up with the data already in 'users'
+
+insert into staff values ('David','Hughes','ProdDev',1,1.82)\p\g
+insert into staff values ('Fred','Smith','Admin',2, 2.12)\p\g
+insert into staff values ('Bill','Jones','Finance',3, 2.1)\p\g
+insert into staff values ('Mike','Horn','Marketing', 5, 1.999)\p\g
+insert into staff values ('Tom','Hanks','Sales', 4, 2)\p\g
+insert into staff values ('John','Eales','Sport', -5, 2.23)\p\g
+
+insert into contact (staff_id, phone, address) values (1,'(07) 1234 5678',
+	'3 Foo Street, Some Place Near the Beach, Qld, Australia')\p\g
+insert into contact (staff_id, phone, address) values (2,'(07) 2224 3338',
+	'5 Baa Place, Some Place Out Back, Qld, Australia')\p\g
+insert into contact (staff_id, phone, address) values (5,'(07) 5554 6668',
+	'Trailer 16, Main Beach Caravan Park, Qld, Australia')\p\g
+insert into contact (staff_id, phone, address) values (4,'(07) 4444 5555',
+	'9/225 O\'Keafe Street, Near the Office, Qld, Australia')\p\g
+insert into contact (staff_id, phone, address) values (3,'(07) 3333 4444',
+	'Right Here!')\p\g
+
+insert into pay values (1, '1-jan-1997', '12:00:00', 1000)\p\g
+insert into pay values (1, '1-feb-1997', '12:00:00', 1000)\p\g
+insert into pay values (1, '1-mar-1997', '12:00:00', 1000)\p\g
+
+insert into pay values (2, '15-jan-1997', '8:30:00', 750)\p\g
+insert into pay values (2, '15-feb-1997', '8:30:00', 750)\p\g
+insert into pay values (2, '15-Mar-1997', '8:30:00', 750)\p\g
+
+insert into pay values (3, '16-Oct-1991', '8:30:00', 25)\p\g
+insert into pay values (3, '27-dec-1992', '8:30:00', 15)\p\g
+insert into pay values (3, '01-Mar-1997', '12:30:00', 750)\p\g
+insert into pay values (3, '19-Jun-1996', '10:45:00', 3)\p\g
+
+
+# ERROR : Bad table name
+
+insert into foo_stuff values ('a', 1 )\p\g
+
+
+#  ERROR : Bad field name and multiples, and bad type
+
+insert into staff (first_name, last_name, initial) values ('a', 'b', 'c')\p\g
+insert into users (staff_id, uname, uname) values (1, 'b', 'c')\p\g
+insert into users (staff_id, uname) values ('1', 'b')\p\g
+
+
+# ERROR : NULL Values and non-unique
+
+insert into contact values (NULL, '123', 'abc')\p\g
+insert into contact (phone, address) values ('123', 'abc')\p\g
+insert into staff values ('foo', 'baa', 'baz', 3, 1.1)\p\g
+
+
+# ERROR : Bad data formats
+
+insert into pay values (2, '13-Foo-1998','12:00:00', 1)\p\g
+insert into pay values (2, '13-Feb-1998','hh00:00', 1)\p\g
+

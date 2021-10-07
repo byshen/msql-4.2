@@ -1,0 +1,48 @@
+# Regex testing
+
+create table regex_test (
+	int_val		int,
+	char_val	char(10),
+	text_val	text(10)
+)\p\g
+
+insert into regex_test values (1, 'aaa', 'AAA')\p\g
+insert into regex_test values (2, 'bbb', 'BBB')\p\g
+insert into regex_test values (3, 'ccc', 'CCC')\p\g
+insert into regex_test values (4, 'ddd', 'DDD')\p\g
+insert into regex_test values (5, 'eee', 'EEE')\p\g
+insert into regex_test values (6, 'fff', 'FFF')\p\g
+insert into regex_test values (7, 'ggg', 'GGG')\p\g
+insert into regex_test values (8, 'hhh', 'HHH')\p\g
+insert into regex_test values (9, 'iii', 'III')\p\g
+
+# Selects on the char field
+
+select * from regex_test where char_val like '_e_' \p\g
+select * from regex_test where char_val like 'e_' \p\g
+select * from regex_test where char_val like 'e%' \p\g
+
+select * from regex_test where char_val rlike '.e.' \p\g
+select * from regex_test where char_val like 'e.' \p\g
+select * from regex_test where char_val rlike 'e.*' \p\g
+
+select * from regex_test where char_val like 'G%' \p\g
+select * from regex_test where char_val clike 'G%' \p\g
+
+select * from regex_test where char_val slike 'ahh' \p\g
+
+# Selects on the text field
+
+select * from regex_test where text_val like '_E_' \p\g
+select * from regex_test where text_val like 'E_' \p\g
+select * from regex_test where text_val like 'E%' \p\g
+
+select * from regex_test where text_val rlike '.E.' \p\g
+select * from regex_test where text_val like 'E.' \p\g
+select * from regex_test where text_val rlike 'E.*' \p\g
+
+select * from regex_test where text_val like 'g%' \p\g
+select * from regex_test where text_val clike 'g%' \p\g
+
+select * from regex_test where text_val slike 'ahh' \p\g
+

@@ -1,0 +1,7 @@
+EXTRA_CFLAGS= -DTARGET=\\"$(TARGET)\\" -DINST_DIR=\\"$(INST_DIR)\\"
+
+!object msqladmin.o msqladmin.c
+
+!program msqladmin msqladmin.o,../libmsql/libmsql.a
+!install msqladmin $(INST_DIR)/bin/msqladmin 0755
+

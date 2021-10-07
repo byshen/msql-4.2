@@ -1,0 +1,60 @@
+mSQL Killer Test.     Test machine = FreeBSD stag.Hughes.com.au 2.2.8-RELEASE FreeBSD 2.2.8-RELEASE #0: Thu Jan 25 12:07:20 EST 2001     root@stag:/usr/src/sys/compile/BUCK  i386
+	mSQL server version 	2.0.12
+------------------------------------------------------------
+
+
+Inserting 100000 rows into new keyed table gave :-
+	42.63 seconds real time
+
+	Total time = 42.63
+	Average operations per second = 2345
+
+
+
+
+Filling a deleted keyed table with 100000 rows gave :-
+	46.25 seconds real time
+
+	Total time = 46.25
+	Average operations per second = 2162
+
+
+
+
+Selecting 25000 rows using primary key :-
+	14.86 seconds real time
+
+	Total time = 14.86
+	Average operations per second = 1682
+
+
+
+
+Inserting 100000 rows into new flat table gave :-
+	35.36 seconds real time
+
+	Total time = 35.36
+	Average operations per second = 2828
+
+
+
+
+Filling a deleted flat table with 100000 rows gave :-
+	40.99 seconds real time
+
+	Total time = 40.99
+	Average operations per second = 2439
+
+
+
+
+Selecting 200 rows without a key :-
+	50.18 seconds real time
+
+	Total time = 50.18
+	Average operations per second = 498
+
+
+Total execution time = 230.27
+
+

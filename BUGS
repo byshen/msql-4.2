@@ -1,0 +1,17 @@
+How to report a bug in mSQL
+===========================
+
+Reporting a bug without information showing how to reproduce the bug
+doesn't help to solve the problem as we can only solve the problems that
+we can reproduce.  If you find what you think is a bug, please gather the 
+following information
+
+	o Output of "msqladmin version"
+	o A dump of the database (using msqldump)
+	o The query or queries that reproduce the problem
+	o A description of the problem
+
+Once you have the above information, please provide the details in
+the support forum available from our web site.  We fix every bug reported 
+that we can reproduce before the next release.
+

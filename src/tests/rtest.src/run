@@ -1,0 +1,9 @@
+#!/bin/sh
+
+msql test < reset
+
+for I in ?.test
+do
+	base=`echo $I | sed "s/.test//"`
+	msql test < $base.test > $base.out
+done

@@ -1,0 +1,10 @@
+SOURCE_DIR=$(BASE_SOURCE_DIR)/msqld/broker
+EXTRA_CFLAGS= $(MSG)
+
+all: libbroker.a
+
+!library_unix libbroker.a broker.c,broker_child.c,filelib.c
+
+
+broker.0: broker.h broker_priv.h
+broker_child.0: broker.h 

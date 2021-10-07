@@ -1,0 +1,65 @@
+
+all :: all_intro
+
+all_intro :
+	@echo ;\\
+	echo "Starting make for mSQL" ;\\
+	echo
+
+install ::
+	@echo 					;\\
+	echo "Starting install for mSQL" 	;\\
+	echo 					;\\
+	cd .. ; scripts/make-install $(INST_DIR)
+
+
+!directory common all,clean,install
+!directory libmsql all,clean,install
+!directory msqld all,clean,install
+!directory msql all,clean,install
+!directory msqladmin all,clean,install
+!directory msqldump all,clean,install
+!directory msqlexport all,clean,install
+!directory msqlexplain all,clean,install
+!directory msqlimport all,clean,install
+!directory relshow all,clean,install
+!directory tests all,clean,install
+
+all :: all_footer
+
+all_footer:
+	@echo ;\\
+	echo "Make of mSQL complete.";\\
+	echo "You should now install mSQL using \"make install\"" ;\\
+	echo ;\\
+	echo
+
+install ::
+	@cp makegen/makegen makegen/*.cf makegen/*.mm $(INST_DIR)/makegen;\\
+	chmod 755 $(INST_DIR)/makegen/*;\\
+	cp site.mm $(INST_DIR)/makegen;\\
+        if test -f $(INST_DIR)/etc/msql.conf;\
+        then\
+                rm -f $(INST_DIR)/etc/msql.conf.old;\
+                mv $(INST_DIR)/etc/msql.conf $(INST_DIR)/etc/msql.conf.old;\
+        fi;\
+	sed "s,_INST_,$(INST_DIR),"< ../misc/msql.conf >$(INST_DIR)/etc/msql.conf;\\
+	echo ;\\
+	echo ;\\
+	echo ;\\
+	echo "Setting directory ownership";\\
+	chown daemon $(INST_DIR);\\
+	chown -R daemon $(INST_DIR)/msqldb;\\
+	echo ;\\
+	echo ;\\
+        if test -f /etc/init.d;\
+        then\
+                cp ../misc/initd_msql /etc/init.d/msql;\
+                echo "Installed service script into /etc/init.d";\
+        fi;\
+	echo ;\\
+	echo "Installation of mSQL complete." ;\\
+	echo ;\\
+	echo ;\\
+	echo
+

@@ -1,0 +1,9 @@
+
+EXTRA_CFLAGS= $(PIC)
+
+all: debug.o
+
+!object debug.o debug.c
+
+debug.o: debug.h 
+

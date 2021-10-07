@@ -1,0 +1,18 @@
+#
+# Test the use of resorved words as idents
+#
+
+create table table(int int, char char(5), index uint)\p\g
+create table unique(key int, date date)\p\g
+create table updates(update text(10), update_time time)\p\g
+
+insert into unique values (1, '1-Jan-1001')\p\g
+insert into unique values (2, '2-Feb-2002')\p\g
+select * from unique where date > '1-Jan-999' \p\g
+
+#
+# Test the new offset clause
+
+select first_name, last_name from staff order by last_name \p\g
+select first_name, last_name from staff order by last_name offset 2\p\g
+select first_name, last_name from staff order by last_name limit 1 offset 3 \p\g

@@ -1,0 +1,4 @@
+drop table staff\p\g
+drop table contact\p\g
+drop table users\p\g
+drop table pay\p\g

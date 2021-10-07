@@ -1,0 +1,511 @@
+#!/bin/sh
+#
+#	Configuration script for mSQL.  This calls an autoconf generated
+#	script for most of the hard work but does a few other checks
+#	itself.
+
+
+# Is this a Posix or bsd-ish shell?
+
+if echo '\c' | grep -s c >/dev/null 2>&1
+then
+	ECHO_N="echo -n"
+	ECHO_C=""
+else
+	ECHO_N="echo"
+	ECHO_C='\c'
+fi
+
+NEW_LINE="
+"
+
+echo
+echo "Starting configuration of mSQL."
+echo 
+
+scripts/sys-arch > conf/target
+
+
+cp conf/configure setup-configure
+./setup-configure
+
+if test $? != 0
+then
+	rm -f setup-configure*
+	echo "Setup Failed !!"
+	exit 1
+fi
+
+rm -f setup-configure*
+
+
+if test "$LEX." = "flex."
+then
+	FLEX="1"
+else
+	FLEX="0"
+fi
+
+
+CC=cc
+for I in `echo $PATH | sed "s/:/ /g"`
+do
+        if test -x "$I/gcc"
+        then
+                CC="$I/gcc"
+        fi
+done
+
+
+
+echo
+echo "Using $CC for testing"
+
+#
+# Work out how to do a readdir().  Could be Posix dirent or direct.
+# Could need dirent.h, sys/dir.h or even both!  (God help us).
+#
+
+$ECHO_N "checking your directory stuff. $ECHO_C"
+cd conf
+	DIRENT=""
+	# Try Posix first
+	rm -f dirent
+	DEFS="-DHAVE_DIRENT_H -DHAVE_DIRENT"
+	${CC-cc} -I../ -o dirent $DEFS dirent.c >/dev/null 2>&1
+	if test $? = 0
+	then
+		DIRENT_H="#define HAVE_DIRENT_H"
+		DIRENT="#define HAVE_DIRENT"
+		echo " Using dirent.h and struct dirent"
+	fi
+
+	# Try old style
+	if test "$DIRENT." = "."
+	then
+		rm -f dirent
+		DEFS="-DHAVE_SYS_DIR_H -DHAVE_DIRECT"
+		${CC-cc} -I../ -o dirent $DEFS dirent.c >/dev/null 2>&1
+		if test $? = 0
+		then
+			SYS_DIR_H="#define HAVE_SYS_DIR_H"
+			DIRECT="#define HAVE_DIRECT"
+			echo " Using sys/dir.h and struct direct"
+		fi
+	fi
+
+	# O.K. Time to get silly
+	if test "$DIRENT." = "."
+	then
+		rm -f dirent
+		DEFS="-DHAVE_DIRENT_H -DHAVE_SYS_DIR_H -DHAVE_DIRECT"
+		${CC-cc} -I../ -o dirent $DEFS dirent.c >/dev/null 2>&1
+		if test $? = 0
+		then
+			DIRENT_H="#define HAVE_DIRENT_H"
+			DIRECT="#define HAVE_DIRECT"
+			SYS_DIR_H="#define HAVE_SYS_DIR_H"
+			echo " Using sys/dir.h, dirent.h and struct direct"
+		fi
+	fi
+
+	if test "$DIRENT." = "."
+	then
+		echo
+		echo
+		echo "Hang on!  Could't work out your directory routines"
+		echo "Check out conf/dirent.c and see what you need defined"
+		echo "to make it compile.  When you've worked that out,"
+		echo "rerun this script and enter the details at the prompt"
+		echo "offered below (e.g. -DHAVE_DIRENT -DHAVE_DIRENT_H) :-"
+		echo 
+		$ECHO_N "Defines for directory stuff? "
+		read DIRENT
+	fi
+
+
+
+rm -f dirent
+cd ..
+
+
+#
+# mmap() test.
+#
+
+$ECHO_N "checking your mmap(). $ECHO_C"
+
+cd conf
+${CC-cc} -I../ -o mmap mmap.c >/dev/null 2>&1
+if test $? != 0
+then
+	MMAP=
+	echo " You don't have mmap()"
+	echo
+	echo "mSQL 3 needs a working mmap(), it cannot work without it."
+	echo "You cannot run mSQL on this machine.  Sorry."
+	echo
+	exit 1
+else
+	./mmap
+	if test $? != 0
+	then
+	    echo " Your mmap() isn't good enough !!!!"
+	    echo
+	    echo "mSQL needs a working mmap(), it cannot work without it."
+	    echo "You cannot run mSQL on this machine.  Sorry."
+	    echo
+	    exit 1
+	else
+	    echo " Your mmap() is fine."
+	    MMAP="#define HAVE_MMAP"
+	fi
+fi
+rm -f mmap
+cd ..
+
+
+#
+# Work out how many args msync() takes on this box
+#
+
+$ECHO_N "checking your msync(). $ECHO_C"
+cd conf
+	MSYNC=""
+	# Try 2 args first
+	rm -f msync
+	DEFS="-DMSYNC_2"
+	${CC-cc} -I../ -o msync $DEFS msync.c >/dev/null 2>&1
+	if test $? = 0
+	then
+		MSYNC="#define MSYNC_2"
+		echo " Using 2 args to msync."
+	else
+		MSYNC="#define MSYNC_3"
+		echo " Using 3 args to msync."
+	fi
+	rm -f msync
+cd ..
+
+
+#
+# Work out how to get the offset from GMT
+#
+
+$ECHO_N "checking your GMT offset. $ECHO_C"
+cd conf
+	GMT_OFFSET=""
+	# try the tm_gmtoff struct element firts
+	rm -f gmt_offset
+	DEFS="-DHAVE_GMTOFF"
+
+	${CC-cc} -I../ -o gmt_offset $DEFS gmt_offset.c >/dev/null 2>&1
+	if test $? = 0
+	then
+		GMT_OFFSET="#define HAVE_GMTOFF"
+		echo " Using the tm_gmtoff field of struct tm."
+	else
+		DEFS="-DHAVE_TIMEZONE"
+		${CC-cc} -I../ -o gmt_offset $DEFS gmt_offset.c >/dev/null 2>&1
+		if test $? = 0
+		then
+			GMT_OFFSET="#define HAVE_TIMEZONE"
+			echo " Using external timezone variable (solaris)."
+		else
+			echo " CANT WORK IT OUT."
+		fi
+	fi
+	rm -f gmt_offset
+cd ..
+
+
+#
+# syserr test.
+#
+
+$ECHO_N "checking for sys_errlist. $ECHO_C"
+
+cd conf
+${CC-cc} -I../ -o syserr syserr.c >/dev/null 2>&1
+if test $? != 0
+then
+	SYS_ERR=
+	echo " You don't have sys_errlist in stdio.h or sys/types.h"
+else
+	SYS_ERR="#define HAVE_SYS_ERRLIST"
+	echo " You're fine."
+fi
+rm -f syserr
+cd ..
+
+#
+# u_int test.
+#
+
+$ECHO_N "checking for u_int. $ECHO_C"
+
+cd conf
+${CC-cc} -I../ -o uint uint.c >/dev/null 2>&1
+if test $? != 0
+then
+	U_INT=
+	echo " You don't have u_int in sys/types.h"
+else
+	U_INT="#define HAVE_U_INT"
+	echo " You're fine."
+fi
+rm -f uint
+cd ..
+
+#
+# uint32_t test.
+#
+
+$ECHO_N "checking for int32_t and friends. $ECHO_C"
+
+cd conf
+${CC-cc} -I../ -o uint32 uint32.c >/dev/null 2>&1
+if test $? != 0
+then
+	BITTYPES=
+	echo " You don't have the bit types."
+else
+	BITTYPES="#define HAVE_BIT_TYPES"
+	echo " You're fine."
+fi
+rm -f uint32
+cd ..
+
+
+#
+# huge test.
+#
+
+$ECHO_N "checking for 64 bit ints? $ECHO_C"
+
+cd conf
+${CC-cc} -I../ -DHUGE=int64_t -o huge huge.c >/dev/null 2>&1
+if test $? = 0
+then
+	HUGE_T="#define HUGE_T int64_t"
+	UHUGE_T="#define UHUGE_T uint64_t"
+else
+	${CC-cc} -I../ -DHUGE="long long" -o huge huge.c >/dev/null 2>&1
+	if test $? = 0
+	then
+		HUGE_T="#define HUGE_T long long"
+		UHUGE_T="#define UHUGE_T unsigned long long"
+	fi
+fi
+rm -f huge
+if test "$HUGE_T." = "."
+then
+	echo "No 64 bit integer support"
+else
+	echo "Yes.  Using '$HUGE_T'"
+fi
+cd ..
+
+
+
+#
+# RLIMIT_NOFILE test.
+#
+
+$ECHO_N "checking for a working getrlimit. $ECHO_C"
+
+cd conf
+${CC-cc} -I../ -o rlimit rlimit.c >/dev/null 2>&1
+if test $? != 0
+then
+	WORKING_RLIMIT=
+	echo " Nope! (can't find RLIMIT_NOFILE)"
+else
+	WORKING_RLIMIT="#define HAVE_RLIMIT_NOFILE"
+	echo " You're fine."
+fi
+rm -f rlimit
+cd ..
+
+#
+# See struct tm has the dst field
+#
+
+$ECHO_N "checking for day light saving info. $ECHO_C"
+
+cd conf
+${CC-cc} -I../ -o dst dst.c >/dev/null 2>&1
+if test $? != 0
+then
+	HAVE_ISDST=
+	echo " Nope!"
+else
+	HAVE_ISDST="#define HAVE_ISDST"
+	echo " Yup, we'll use it."
+fi
+rm -f dst
+cd ..
+
+#
+# See if this is an HP-UX box in which case we must not call ranlib on
+# archive files (unles we use the -z flag to ar) as reported by Eric
+# Schwartz <erics@col.hp.com>
+#
+
+$ECHO_N "checking for HP-UX ranlib. $ECHO_C"
+OS=`uname -s`
+if test "$OS." = "HP-UX."
+then
+	RAN_TO="= true"
+	echo "Yup, it's HP-UX.  Won't use ranlib."
+else
+	RAN_TO="= ranlib"
+	echo "Nope, it's OK to use ranlib."
+fi
+
+
+#
+# Check for -fPIC support in the compiler
+#
+$ECHO_N "checking for position independant code support. $ECHO_C"
+cd conf
+${CC-cc} -fPIC -o pic.o pic.c >/dev/null 2>&1
+if test $? != 0
+then
+	PIC=
+	echo " Nope!"
+else
+	PIC="-fPIC"
+	echo " Yup, can use -fPIC"
+fi
+rm -f pic.o
+cd ..
+
+#
+# Work out how to pass a file descriptor (3 choices)
+#
+
+echo
+$ECHO_N "checking how to pass a file descriptor. $ECHO_C"
+cd conf
+        MSG=""
+        # Try Old BSD first
+        rm -f filepass
+        DEFS="-DOLD_BSD_MSG"
+        ${CC-cc} -I../ -o filepass $DEFS filepass.c >/dev/null 2>&1
+        if test $? = 0
+        then
+                MSG="#define OLD_BSD_MSG"
+                echo " Using Old BSD approach."
+        fi
+
+        # Try New BSD method
+        if test "$MSG." = "."
+        then
+                rm -f filepass
+                DEFS="-DNEW_BSD_MSG"
+
+                ${CC-cc} -I../ -o filepass $DEFS filepass.c >/dev/null 2>&1
+           	if test $? = 0
+                then
+                        MSG="#define NEW_BSD_MSG"
+                        echo " Using New BSD approach."
+                fi
+        fi
+
+        # O.K. How about the SysV ioctl way
+        if test "$MSG." = "."
+        then
+                rm -f filepass
+                DEFS="-DSYSV_MSG"
+                ${CC-cc} -I../ -o filepass $DEFS filepass.c >/dev/null 2>&1
+                if test $? = 0
+                then
+                        MSG="#define SYSV_MSG"
+                        echo " Using SysV approach."
+                fi
+        fi
+
+        if test "$MSG." = "."
+        then
+                echo
+                echo
+                echo "Hang on!  Could't work out how to pass a file descriptor!"
+                echo "mSQL 3 supports 3 methods, Old BSD, New BSD and SYSV."
+                echo "Your systems doesn't appear to support any of these."
+                echo
+                echo "Setup aborting!"
+                echo
+                exit 1
+        fi
+
+rm -f filepass
+cd ..
+
+
+
+#
+# See if this is a Linux box in which case we must add -rdynamic to the
+# link options to allow dynamic loaded Lite modules to access symbols
+# in the Lite binary itself.
+#
+
+$ECHO_N "checking for Linux. $ECHO_C"
+OS=`uname -s`
+if test "$OS." = "Linux."
+then
+	LINUX_DYNAMIC="-rdynamic"
+	MSYNC="#define MSYNC_3"
+	echo "Yup, it's Linux.  Adding -rdynamic to the link flags."
+	$ECHO_N "                    $ECHO_C"
+	echo "Forcing msync for Linux."
+else
+	LINUX_DYNAMIC=""
+	echo "Nope, use normal linking."
+fi
+
+
+
+
+
+TARGET=`cat conf/target`
+sed "	s,@INST_TOP@,$INST_TOP,
+	s,@FLEX@,$FLEX,
+	s,@PIC@,$PIC,
+	s,@ROOT_EXEC@,$ROOT_EXEC,
+	s,@ROOT@,$ROOT,
+	s,@PID_DIR@,$PID_DIR,
+	s,@TARGET@,$TARGET,
+	s,@LINUX_DYNAMIC@,$LINUX_DYNAMIC,
+	s,= ranlib,$RAN_TO,
+" < conf/site.mm > src/site.mm
+rm -f conf/site.mm
+
+sed "	s,@SIGLIST@,$SIGLIST,
+	s,@DIRENT@,$DIRENT,
+	s,@DIRECT@,$DIRECT,
+	s,@SYS_DIR_H@,$SYS_DIR_H,
+	s,@MMAP@,$MMAP,
+	s,@MSYNC@,$MSYNC,
+	s,@U_INT@,$U_INT,
+	s,@BITTYPES@,$BITTYPES,
+	s,@WORKING_RLIMIT@,$WORKING_RLIMIT,
+	s,@SYS_ERR@,$SYS_ERR,
+	s,@GMT_OFFSET@,$GMT_OFFSET,
+	s,@HAVE_ISDST@,$HAVE_ISDST,
+	s,@MSG@,$MSG,
+	s,@HUGE_T@,$HUGE_T,
+	s,@UHUGE_T@,$UHUGE_T,
+" < src/common/config_extras.h.in > src/common/config_extras.h
+
+echo
+echo "Ready to build mSQL."
+echo
+echo
+echo
+echo "You may wish to check \"src/site.mm\" although the defaults should be"
+echo "fine.  When you're ready, type  \"make all\" to build the software"
+echo
+echo
+echo
+echo

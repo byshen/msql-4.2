@@ -1,0 +1,428 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     ->     -> 
+Query buffer
+------------
+
+select _rowid, staff_id, first_name, last_name from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +----------+----------+------------+------------+
+ | _rowid   | staff_id | first_name | last_name  |
+ +----------+----------+------------+------------+
+ | 0        | 1        | David      | Hughes     |
+ | 1        | 2        | Fred       | Smith      |
+ | 2        | 3        | Bill       | Jones      |
+ | 3        | 5        | Mike       | Horn       |
+ | 4        | 4        | Tom        | Hanks      |
+ | 5        | -5       | John       | Eales      |
+ +----------+----------+------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _rowid, staff_id, uname from users where _rowid > 2 
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +----------+----------+-----------------+
+ | _rowid   | staff_id | uname           |
+ +----------+----------+-----------------+
+ | 3        | 3        | bill            |
+ | 4        | 1        | bambi           |
+ +----------+----------+-----------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select staff_id, uname from users where _rowid > 2 
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +----------+-----------------+
+ | staff_id | uname           |
+ +----------+-----------------+
+ | 3        | bill            |
+ | 1        | bambi           |
+ +----------+-----------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _rowid, staff_id, pay_date from pay where _rowid <= 8 and _rowid > 4
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +----------+----------+-------------+
+ | _rowid   | staff_id | pay_date    |
+ +----------+----------+-------------+
+ | 5        | 2        | 15-Mar-1997 |
+ | 6        | 3        | 16-Oct-1991 |
+ | 7        | 3        | 27-Dec-1992 |
+ | 8        | 3        | 01-Mar-1997 |
+ +----------+----------+-------------+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+create sequence on staff
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create sequence on contact step 2
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create sequence on pay step -3 value 300
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+select _seq from staff
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 1        |
+ +----------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _seq from staff
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 2        |
+ +----------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _seq from staff
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 3        |
+ +----------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select _seq from contact
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 1        |
+ +----------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _seq from contact
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 3        |
+ +----------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _seq from contact
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 5        |
+ +----------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select _seq from pay
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 300      |
+ +----------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _seq from pay
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 297      |
+ +----------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _seq from pay
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 294      |
+ +----------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _seq from pay
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 291      |
+ +----------+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+drop sequence from pay
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create sequence on pay step 7 value 100 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select _seq from pay
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 100      |
+ +----------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _seq from pay
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 107      |
+ +----------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select _seq from pay
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+
+ | _seq     |
+ +----------+
+ | 114      |
+ +----------+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+create sequence on pay
+[continue]
+    -> 
+
+ERROR : Table 'pay' already has a sequence
+
+
+mSQL > 
+Query buffer
+------------
+create sequence on staff step 5 value 17
+[continue]
+    -> 
+
+ERROR : Table 'staff' already has a sequence
+
+
+mSQL >     ->     ->     ->     -> 
+Query buffer
+------------
+
+select _rowid,staff_id, first_name, last_name from staff 
+	where staff_id > _rowid
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +----------+----------+------------+------------+
+ | _rowid   | staff_id | first_name | last_name  |
+ +----------+----------+------------+------------+
+ | 0        | 1        | David      | Hughes     |
+ | 1        | 2        | Fred       | Smith      |
+ | 2        | 3        | Bill       | Jones      |
+ | 3        | 5        | Mike       | Horn       |
+ +----------+----------+------------+------------+
+
+
+
+mSQL >     ->     -> 
+Query buffer
+------------
+select _rowid,staff_id, first_name, last_name from staff 
+	where staff_id = _rowid
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------+----------+------------+------------+
+ | _rowid   | staff_id | first_name | last_name  |
+ +----------+----------+------------+------------+
+ | 4        | 4        | Tom        | Hanks      |
+ +----------+----------+------------+------------+
+
+
+
+mSQL >     ->     ->     -> 
+Query buffer
+------------
+
+select _seq, _rowid, staff_id, first_name, last_name from staff
+	where _rowid < _seq
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +----------+----------+----------+------------+------------+
+ | _seq     | _rowid   | staff_id | first_name | last_name  |
+ +----------+----------+----------+------------+------------+
+ | 4        | 0        | 1        | David      | Hughes     |
+ | 4        | 1        | 2        | Fred       | Smith      |
+ | 4        | 2        | 3        | Bill       | Jones      |
+ | 4        | 3        | 5        | Mike       | Horn       |
+ +----------+----------+----------+------------+------------+
+
+
+
+mSQL > 
+Bye!
+

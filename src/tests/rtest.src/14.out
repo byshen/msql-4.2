@@ -1,0 +1,137 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     -> 
+Query buffer
+------------
+
+create table table(int int, char char(5), index uint)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create table unique(key int, date date)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create table updates(update text(10), update_time time)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+insert into unique values (1, '1-Jan-1001')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+insert into unique values (2, '2-Feb-2002')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from unique where date > '1-Jan-999' 
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +----------+-------------+
+ | key      | date        |
+ +----------+-------------+
+ | 1        | 01-Jan-1001 |
+ | 2        | 02-Feb-2002 |
+ +----------+-------------+
+
+
+
+mSQL >     ->     -> 
+Query buffer
+------------
+
+select first_name, last_name from staff order by last_name 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------+
+ | first_name | last_name  |
+ +------------+------------+
+ | John       | Eales      |
+ | Tom        | Hanks      |
+ | Mike       | Horn       |
+ | David      | Hughes     |
+ | Bill       | Jones      |
+ | Fred       | Smith      |
+ +------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, last_name from staff order by last_name offset 2
+[continue]
+    -> 
+Query OK.  4 row(s) modified or retrieved.
+
+ +------------+------------+
+ | first_name | last_name  |
+ +------------+------------+
+ | Mike       | Horn       |
+ | David      | Hughes     |
+ | Bill       | Jones      |
+ | Fred       | Smith      |
+ +------------+------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, last_name from staff order by last_name limit 1 offset 3 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +------------+------------+
+ | first_name | last_name  |
+ +------------+------------+
+ | David      | Hughes     |
+ +------------+------------+
+
+
+
+mSQL > 
+Bye!
+

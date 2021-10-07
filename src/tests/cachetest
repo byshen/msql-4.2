@@ -1,0 +1,79 @@
+#!/bin/sh
+#
+#  This script beats the internal table caching code around the ears a
+#  few times.  It constantly forces the caches to be rolled and
+#  reloaded.  Run it using "cachetest dbname" where dbname is a database
+#  that exists and doesn't have tables called test1 test2 or test3 in it.
+#
+#							bambi
+
+INSERT1="insert into test1 values ('Test1',1)"
+INSERT2="insert into test2 values ('Test2',2)"
+INSERT3="insert into test3 values ('Test3',3)"
+INSERT4="insert into test4 values ('Test4',4)"
+INSERT5="insert into test5 values ('Test5',5)"
+INSERT6="insert into test6 values ('Test6',6)"
+INSERT7="insert into test7 values ('Test7',7)"
+INSERT8="insert into test8 values ('Test8',8)"
+INSERT9="insert into test9 values ('Test9',9)"
+INSERT10="insert into test10 values ('Test10',10)"
+
+NUM_TABLES=50
+NUM_CYCLES=20
+COUNT=0
+INDEX=1
+DB=$1
+
+if test "$DB." = "."
+then
+        echo
+        echo "Bad usage.  Please read the intro to the script."
+        echo
+        exit 1
+fi
+
+(
+	CUR=0
+	while test $CUR -lt $NUM_TABLES
+	do
+		echo "DROP TABLE test_$CUR \p\g"
+		CUR=`expr $CUR + 1`
+	done
+
+	CUR=0
+	while test $CUR -lt $NUM_TABLES
+	do
+		echo "create table test_$CUR ( name char(40), num int) \p\g"
+		echo "create index idx1 on test_$CUR ( name ) \p\g"
+		echo "create index idx2 on test_$CUR ( num ) \p\g"
+		echo "create index idx3 on test_$CUR ( name, num ) \p\g"
+		CUR=`expr $CUR + 1`
+	done
+
+	CUR=0
+	while test $CUR -lt $NUM_TABLES
+	do
+		echo "insert into test_$CUR values ('Test $CUR',$CUR) \p\g"
+		CUR=`expr $CUR + 1`
+	done
+
+
+	INC=1
+	while test $COUNT -lt $NUM_CYCLES
+	do
+		CUR=0
+		TEST_COUNT=0
+		while test $TEST_COUNT -lt $NUM_TABLES
+		do
+			echo "select * from test_$CUR \p\g"
+			CUR=`expr $CUR + $INC`
+			if test $CUR -ge $NUM_TABLES
+			then
+				CUR=`expr $CUR - $NUM_TABLES`
+			fi
+			TEST_COUNT=`expr $TEST_COUNT + 1`
+		done
+		INC=`expr $INC + 1`
+		COUNT=`expr $COUNT + 1`
+	done
+) | ../msql/msql $DB

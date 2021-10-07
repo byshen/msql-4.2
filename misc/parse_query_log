@@ -1,0 +1,106 @@
+#!/usr/local/ember/bin/ember
+
+/*
+** Copyright (c) 1999-2001 Hughes Technologies Pty Ltd.
+**
+** This is a sample script that provides an example of query log
+** processing.  The query log file is a trace of all the queries
+** processed by the server.  To create a query log, edit the config
+** file and set Query_Log to True.  You can also set the value of
+** Query_Log_File to the output file (default is query.log in your
+** installation directory).
+**
+** Each entry in the log file has 2 parts and there is a blank line
+** between each entry.  The first part of the entry is a header line
+** containing ...
+**
+**   QueryDate QueryTime Username Hostname Database QueryLength
+**
+** Following the header line is Queryength bytes of text (including the
+** line feeds) which is the query itself as received by the backend.
+** Remember that a query may include any number of lines, including
+** blank lines, so the query length should be used to determine the end
+** of the query text.
+**
+** The script takes an option command line arg, being the name of the
+** script file.  If it is not provided it default to using
+** /usr/local/msql3/query.log
+*/
+
+
+if ($argc == 1) {
+	$log_file = "/usr/local/msql3/query.log";
+}
+if ($argc == 2) {
+	$log_file = $argv[1];
+}
+if ($argc > 2) {
+	echo("\nUsage: parse_query_log [filename]\n\n");
+	exit(1);
+}
+
+
+/*
+** Open the log file
+*/
+$fd = open($log_file,"<");
+if ($fd < 0) {
+	fatal("Can't open query log : $ERRMSG");
+}
+
+/*
+** Skip any leading blank lines just in case the file has been edited.
+*/
+$line = readln($fd);
+while(# $line == 1) {
+	$line = readln($fd);
+}
+
+/*
+** Process the log file
+*/
+
+$count = 1;
+while(# $line > 0) {
+
+	/*
+	** Split up the query header line
+	*/
+	$line = chop($line);
+	$log = split($line," ");
+	$date = $log[0];
+	$time = $log[1];
+	$user = $log[2];
+	$host = $log[3];
+	$db = $log[4];
+	$query_len = (int)$log[5];
+
+	echo("Query $count on DB $db \n\tFor user $user\n");
+	echo("\tFrom host $host\n\tAt $date $time\n\n");
+
+	/*
+	** read the query text based on the query length in the header
+	*/
+	$remain = $query_len;
+	$line = readln($fd);
+	while(# $line > 0) {
+		echo("\t$line");
+		$remain = $remain - # $line;
+		if ($remain == 0) {
+			break;
+		}
+		$line = readln($fd);
+	}
+	echo("\n");
+	$count++;
+
+	/*
+	** There should be a blank line here (between the query entries)
+	** but handle it properly if for some reason the file is not
+	** formatted correctly (i.e. no blank or multiple blanks).
+	*/
+	$line = readln($fd);
+	while (# $line == 1) {
+		$line = readln($fd);
+	}
+}

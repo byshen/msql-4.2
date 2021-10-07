@@ -1,0 +1,36 @@
+#
+# Test CIDR type handling
+
+create table routes (prefix CIDR4, descr CHAR(20))\p\g
+
+insert into routes values ('10.0.0.0/8', 'Net-10 aggregate') \p\g
+
+insert into routes values ('10.1.0.0/16', 'Net-10 block 1') \p\g
+insert into routes values ('10.2.0.0/16', 'Net-10 block 2') \p\g
+insert into routes values ('10.3.0.0/16', 'Net-10 block 3') \p\g
+insert into routes values ('10.4.0.0/16', 'Net-10 block 4') \p\g
+
+insert into routes values ('10.1.1.0/24', 'Net-10 block 1.1') \p\g
+insert into routes values ('10.1.2.0/24', 'Net-10 block 1.2') \p\g
+insert into routes values ('10.1.3.0/24', 'Net-10 block 1.3') \p\g
+insert into routes values ('10.1.4.0/24', 'Net-10 block 1.4') \p\g
+
+insert into routes values ('10.2.1.0/24', 'Net-10 block 2.1') \p\g
+insert into routes values ('10.2.2.0/24', 'Net-10 block 2.2') \p\g
+insert into routes values ('10.2.3.0/24', 'Net-10 block 2.3') \p\g
+insert into routes values ('10.2.4.0/24', 'Net-10 block 2.4') \p\g
+
+insert into routes values ('10.1.1.1/32', 'Net-10 block 1.1.1') \p\g
+insert into routes values ('10.1.1.2/32', 'Net-10 block 1.1.2') \p\g
+insert into routes values ('10.1.1.3/32', 'Net-10 block 1.1.3') \p\g
+insert into routes values ('10.1.1.4/32', 'Net-10 block 1.1.4') \p\g
+
+insert into routes values ('10.1.2.1/32', 'Net-10 block 1.2.1') \p\g
+insert into routes values ('10.1.2.2/32', 'Net-10 block 1.2.2') \p\g
+insert into routes values ('10.1.2.3/32', 'Net-10 block 1.2.3') \p\g
+insert into routes values ('10.1.2.4/32', 'Net-10 block 1.2.4') \p\g
+
+select * from routes where prefix = '10.1.2.0/24' \p\g
+select * from routes where prefix <= '10.1.2.3/32' order by prefix \p\g
+select * from routes where prefix > '10.1.1.0/24' order by prefix \p\g
+select * from routes where prefix < '10.1.1.1/24' order by prefix desc limit 1\p\g

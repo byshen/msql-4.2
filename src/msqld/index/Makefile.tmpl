@@ -1,0 +1,23 @@
+SOURCE_DIR=$(BASE_SOURCE_DIR)/index
+
+#CC_FLAGS= -O2 $(CFLAGS) 
+CC_FLAGS= $(CFLAGS) 
+LINT_FLAGS= $(LINTFLAGS) 
+CC_OPT= 
+
+
+all: libidx.a cpi_test idx_test cpi_stat
+
+!library_unix libidx.a index.c,cpi.c,avl_tree.c
+!program idx_test idx_test.o,libidx.a
+!program cpi_test cpi_test.o,cpi.o
+!program cpi_stat cpi_stat.o,cpi.o
+
+!install cpi_stat $(INST_DIR)/bin/cpi_stat 0755
+
+
+index.o: index.h
+cpi.o: cpi.h cpi_priv.h
+
+clean::
+	rm -f *.o *.a

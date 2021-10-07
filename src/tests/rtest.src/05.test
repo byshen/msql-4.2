@@ -1,0 +1,60 @@
+
+# OK : Simple sysvar stuff
+
+select _rowid, staff_id, first_name, last_name from staff \p\g
+select _rowid, staff_id, uname from users where _rowid > 2 \p\g
+select staff_id, uname from users where _rowid > 2 \p\g
+select _rowid, staff_id, pay_date from pay where _rowid <= 8 and _rowid > 4\p\g
+
+
+# OK : Create a sequence or three
+
+create sequence on staff\p\g
+create sequence on contact step 2\p\g
+create sequence on pay step -3 value 300\p\g
+
+
+# OK : Sequence stuff
+
+select _seq from staff\p\g
+select _seq from staff\p\g
+select _seq from staff\p\g
+
+select _seq from contact\p\g
+select _seq from contact\p\g
+select _seq from contact\p\g
+
+select _seq from pay\p\g
+select _seq from pay\p\g
+select _seq from pay\p\g
+select _seq from pay\p\g
+
+
+# OK : Sequence recreation
+
+drop sequence from pay\p\g
+create sequence on pay step 7 value 100 \p\g
+
+select _seq from pay\p\g
+select _seq from pay\p\g
+select _seq from pay\p\g
+
+
+# ERR : Failed duplicate sequence
+
+create sequence on pay\p\g
+create sequence on staff step 5 value 17\p\g
+
+
+# OK : Selects using sys var as ident field (with and without index)
+
+select _rowid,staff_id, first_name, last_name from staff 
+	where staff_id > _rowid\p\g
+
+select _rowid,staff_id, first_name, last_name from staff 
+	where staff_id = _rowid\p\g
+
+# OK : Selects with sysvar to sysvar comparisons
+
+select _seq, _rowid, staff_id, first_name, last_name from staff
+	where _rowid < _seq\p\g

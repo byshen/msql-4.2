@@ -1,0 +1,19 @@
+#
+# Test the millitime type
+#
+
+create table millitime(v1 millitime)\p\g
+create index idx1 on millitime(v1)\p\g
+
+INSERT INTO millitime  VALUES ('5:30:20.123')\p\g
+INSERT INTO millitime  VALUES ('2:17:18.654')\p\g
+INSERT INTO millitime  VALUES ('17:16:15.140')\p\g
+INSERT INTO millitime  VALUES ('23:59:59.999')\p\g
+INSERT INTO millitime  VALUES ('0:00:00.001')\p\g
+INSERT INTO millitime  VALUES ('10:10:10')\p\g
+INSERT INTO millitime  VALUES ('23:61:00.000')\p\g
+
+select * from millitime order by v1\p\g
+select * from millitime where v1 = '17:16:15.140'\p\g
+select * from millitime where v1 = '10:10:10'\p\g
+select * from millitime where v1 between '5:00:00.000' and '20:00:00.000'\p\g

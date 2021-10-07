@@ -1,0 +1,10 @@
+
+!object insert_test.o insert_test.c
+!object select_test.o select_test.c
+
+
+!program insert_test insert_test.o,../libmsql/libmsql.a
+!program select_test select_test.o,../libmsql/libmsql.a
+
+clean::
+	rm -f *.o *core rtest.src/*.res

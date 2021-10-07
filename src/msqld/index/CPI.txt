@@ -1,0 +1,43 @@
+Clustered Page Index format
+Copyright 1998-1999 Hughes Technologies Pty Ltd.
+All Rights Reserved
+============================================================================
+
+Notes on the CPI format
+-----------------------
+
+CPI provides a key/data index mechanism where the key can be of any
+length and of any "core" data type (int, uint, char, real, byte) and the
+data is an unsigned int.  It has been designed as an external index
+mechanism for mSQL data tables.
+
+CPI has been designed to be fast and efficient by virtue of it's "system
+friendly" design rather than by any academic elegance.  An index file is
+created in clusters of pages where there are X pages per cluster of
+which X-1 of the pages contain data tuples and 1 contains page headers.
+
+Each data page has a page header located in the first page of the
+cluster.  Each header holds the minimum and maximum value of the keys in
+the data page as well as the number of tuples in that page.  By
+performing a single disk access the page in which a value is located can
+be determined.  A second disk access is then made to read the appropriate
+data page.  If the key value is 4 bytes (an int for example) then any
+key from a total of over 130,000 can be retrieved with at most 2 disk
+access (less if the pages are in the cache).
+
+The page header also contains the page number of the data page it
+represents.  Page 0 in each cluster is the "header page" for the
+cluster.  The number of data pages in a cluster is calculated when the
+index is created based on the size of the key using 
+
+	CPI_PAGE_SIZE / ( 2 * keyLength + 2 * sizeof(u_int) )
+
+Using a 4096 byte page and a 4 byte key yields 256 data pages per
+cluster (i.e. 256 header structures will fit into the header page).  The
+physical location of each page is offset by a super block located at the
+front of the file and is calculated using 
+
+	CPI_PAGE_SIZE * pageNum + HTI_SBK_LEN
+
+The superblock holds information about the structure of the index file
+including the keyType, keyLength, first block in the free list etc.

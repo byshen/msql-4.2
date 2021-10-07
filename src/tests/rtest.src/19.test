@@ -1,0 +1,38 @@
+#
+# Test the sub-integer types
+#
+
+
+create table table_int64 (v1 int64)\p\g
+create table table_uint64 (v1 uint64)\p\g
+
+insert into table_uint64 values (2928512910929999932)\p\g
+insert into table_uint64 values (2928512910929999930)\p\g
+insert into table_uint64 values (2928512910939999932)\p\g
+insert into table_uint64 values (29285129109299932)\p\g
+insert into table_uint64 values (17916492470816866292)\p\g
+
+
+select * from table_uint64 where v1 = 2928512910929999930\p\g
+select * from table_uint64 where v1 > 2928512910929999930\p\g
+select * from table_uint64 where v1 < 999999999999999999\p\g
+select * from table_uint64 where v1 > 0\p\g
+select * from table_uint64 where v1 between 2928512910929999930 
+	and 2928512910929999999 \p\g
+
+create index idx1 on table_uint64 (v1)\p\g
+
+select * from table_uint64 where v1 = 2928512910929999930\p\g
+select * from table_uint64 where v1 > 2928512910929999930\p\g
+select * from table_uint64 where v1 < 999999999999999999\p\g
+select * from table_uint64 where v1 > 0\p\g
+select * from table_uint64 where v1 between 2928512910929999930 
+	and 2928512910929999999 \p\g
+
+select * from table_uint64 order by v1\p\g
+
+insert into table_int64 values (1)\p\g
+insert into table_int64 values (-530251602892685324)\p\g
+insert into table_int64 values (999999999999999)\p\g
+
+select * from table_int64 order by v1\p\g

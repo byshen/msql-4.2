@@ -1,0 +1,7 @@
+
+!object msql.o msql.c
+
+
+!program msql msql.o,../libmsql/libmsql.a
+!install msql $(INST_DIR)/bin/msql 0755
+

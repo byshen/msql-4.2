@@ -1,0 +1,376 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     -> 
+Query buffer
+------------
+
+select first_name, length(first_name) 'Name Length' from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------------+
+ | first_name | Name Length      |
+ +------------+------------------+
+ | David      | 5                |
+ | Fred       | 4                |
+ | Bill       | 4                |
+ | Mike       | 4                |
+ | Tom        | 3                |
+ | John       | 4                |
+ +------------+------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, upper(first_name) from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------------------+
+ | first_name | upper                |
+ +------------+----------------------+
+ | David      | DAVID                |
+ | Fred       | FRED                 |
+ | Bill       | BILL                 |
+ | Mike       | MIKE                 |
+ | Tom        | TOM                  |
+ | John       | JOHN                 |
+ +------------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, lower(first_name) from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------------------+
+ | first_name | lower                |
+ +------------+----------------------+
+ | David      | david                |
+ | Fred       | fred                 |
+ | Bill       | bill                 |
+ | Mike       | mike                 |
+ | Tom        | tom                  |
+ | John       | john                 |
+ +------------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, chop(first_name) 'Chopped Name' from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------------------+
+ | first_name | Chopped Name         |
+ +------------+----------------------+
+ | David      | Davi                 |
+ | Fred       | Fre                  |
+ | Bill       | Bil                  |
+ | Mike       | Mik                  |
+ | Tom        | To                   |
+ | John       | Joh                  |
+ +------------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, replace(first_name, 'avi', 'iva') from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------------------+
+ | first_name | replace              |
+ +------------+----------------------+
+ | David      | Divad                |
+ | Fred       | Fred                 |
+ | Bill       | Bill                 |
+ | Mike       | Mike                 |
+ | Tom        | Tom                  |
+ | John       | John                 |
+ +------------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, substr(first_name, 2, 2) from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------------------+
+ | first_name | substr               |
+ +------------+----------------------+
+ | David      | vi                   |
+ | Fred       | ed                   |
+ | Bill       | ll                   |
+ | Mike       | ke                   |
+ | Tom        | m                    |
+ | John       | hn                   |
+ +------------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, translate(first_name, 'A-D', 'a-d') from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------------------+
+ | first_name | translate            |
+ +------------+----------------------+
+ | David      | david                |
+ | Fred       | Fred                 |
+ | Bill       | bill                 |
+ | Mike       | Mike                 |
+ | Tom        | Tom                  |
+ | John       | John                 |
+ +------------+----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, soundex(first_name) 'Soundex Value' from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------------+
+ | first_name | Soundex Value    |
+ +------------+------------------+
+ | David      | 1739             |
+ | Fred       | 2675             |
+ | Bill       | 76               |
+ | Mike       | 810              |
+ | Tom        | 1245             |
+ | John       | 597              |
+ +------------+------------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select first_name, abs(10) 'Absolute Value' from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------------+
+ | first_name | Absolute Value   |
+ +------------+------------------+
+ | David      | 10               |
+ | Fred       | 10               |
+ | Bill       | 10               |
+ | Mike       | 10               |
+ | Tom        | 10               |
+ | John       | 10               |
+ +------------+------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, abs(-7) 'Absolute Value' from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------------+
+ | first_name | Absolute Value   |
+ +------------+------------------+
+ | David      | 7                |
+ | Fred       | 7                |
+ | Bill       | 7                |
+ | Mike       | 7                |
+ | Tom        | 7                |
+ | John       | 7                |
+ +------------+------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, staff_id, abs(staff_id) 'Absolute StaffID' from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------+------------------+
+ | first_name | staff_id | Absolute StaffID |
+ +------------+----------+------------------+
+ | David      | 1        | 1                |
+ | Fred       | 2        | 2                |
+ | Bill       | 3        | 3                |
+ | Mike       | 5        | 5                |
+ | Tom        | 4        | 4                |
+ | John       | -5       | 5                |
+ +------------+----------+------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, height, ceil(height) from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+--------------+------------------+
+ | first_name | height       | ceil             |
+ +------------+--------------+------------------+
+ | David      | 1.82         | 2                |
+ | Fred       | 2.12         | 3                |
+ | Bill       | 2.1          | 3                |
+ | Mike       | 1.999        | 2                |
+ | Tom        | 2            | 2                |
+ | John       | 2.23         | 3                |
+ +------------+--------------+------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, height, floor(height) from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+--------------+------------------+
+ | first_name | height       | floor            |
+ +------------+--------------+------------------+
+ | David      | 1.82         | 1                |
+ | Fred       | 2.12         | 2                |
+ | Bill       | 2.1          | 2                |
+ | Mike       | 1.999        | 1                |
+ | Tom        | 2            | 2                |
+ | John       | 2.23         | 2                |
+ +------------+--------------+------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, staff_id, mod(staff_id, 3) from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------+------------------+
+ | first_name | staff_id | mod              |
+ +------------+----------+------------------+
+ | David      | 1        | 1                |
+ | Fred       | 2        | 2                |
+ | Bill       | 3        | 0                |
+ | Mike       | 5        | 2                |
+ | Tom        | 4        | 1                |
+ | John       | -5       | -2               |
+ +------------+----------+------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, staff_id, sign(staff_id) from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------+------------------+
+ | first_name | staff_id | sign             |
+ +------------+----------+------------------+
+ | David      | 1        | 1                |
+ | Fred       | 2        | 1                |
+ | Bill       | 3        | 1                |
+ | Mike       | 5        | 1                |
+ | Tom        | 4        | 1                |
+ | John       | -5       | -1               |
+ +------------+----------+------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select first_name, staff_id, power(staff_id, 2) from staff 
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+----------+------------------+
+ | first_name | staff_id | power            |
+ +------------+----------+------------------+
+ | David      | 1        | 1                |
+ | Fred       | 2        | 4                |
+ | Bill       | 3        | 9                |
+ | Mike       | 5        | 25               |
+ | Tom        | 4        | 16               |
+ | John       | -5       | 25               |
+ +------------+----------+------------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select first_name, last_name, staff_id  into tmp_staff from staff 
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from tmp_staff
+[continue]
+    -> 
+Query OK.  6 row(s) modified or retrieved.
+
+ +------------+------------+----------+
+ | first_name | last_name  | staff_id |
+ +------------+------------+----------+
+ | David      | Hughes     | 1        |
+ | Fred       | Smith      | 2        |
+ | Bill       | Jones      | 3        |
+ | Mike       | Horn       | 5        |
+ | Tom        | Hanks      | 4        |
+ | John       | Eales      | -5       |
+ +------------+------------+----------+
+
+
+
+mSQL > 
+Bye!
+

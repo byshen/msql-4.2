@@ -1,0 +1,27 @@
+# OK : simple ordering
+
+select * from staff order by last_name, first_name\p\g
+select * from staff order by last_name desc\p\g
+select * from staff order by last_name desc, first_name\p\g
+
+select * from pay order by pay_date\p\g
+select * from pay order by pay_time desc\p\g
+select * from pay order by pay_amount asc, pay_date\p\g
+
+
+
+# OK : distinct testing
+
+select distinct staff_id from pay\p\g
+select distinct staff_id,pay_amount from pay order by staff_id desc\p\g
+
+
+# OK : ordering with sysvars in result
+
+select _rowid, staff_id, uname from users order by uname\p\g
+
+
+
+# OK : ordering with sysvars in result and order
+
+select _rowid, staff_id, uname from users order by _rowid desc\p\g

@@ -1,0 +1,15 @@
+LOCAL_EXTRA_CFLAGS= $(PIC)
+
+CC_FLAGS= $(CFLAGS) 
+LINT_FLAGS= $(LINTFLAGS) 
+
+all: libc_stuff.a
+
+!library_unix libc_stuff.a strlib.c,strerror.c,tmpnam.c,strptime.c,snprintf.c,strtoul.c
+
+strlib.o: ../config.h ../portability.h 
+snprintf.o: ../config.h ../portability.h 
+strtoul.o: ../config.h ../portability.h 
+strerror.o: ../config.h ../portability.h 
+strptime.o: ../config.h ../portability.h 
+

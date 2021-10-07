@@ -1,0 +1,51 @@
+
+# OK : simple select testing
+
+select * from staff\p\g
+select last_name, staff_id, height from staff\p\g
+select * from staff where height > 2\p\g
+
+select staff_id, address from contact\p\g
+
+select * from pay where pay_time > '09:00:00' \p\g
+select * from pay where pay_date < '01-Mar-1997' \p\g
+select * from pay where pay_amount > 100 and pay_amount < 900 \p\g
+
+
+# OK : basic index lookups
+
+select * from staff where staff_id = 2\p\g
+select * from staff where staff_id = 5 and height = 1.999\p\g
+select * from staff where first_name = 'Bill' and last_name = 'Jones'\p\g
+select * from staff where first_name = 'Fred' and dept = 'Admin' and
+	last_name = 'Smith'\p\g
+
+select * from pay where pay_date = '1-mar-1997'\p\g
+select * from pay where pay_time = '8:30:00'\p\g
+select * from pay where pay_date = '15-Feb-1997' and pay_time = '8:30:00'\p\g
+
+
+# OK : simple Ident comparisons
+
+select * from staff where first_name > last_name \p\g
+select * from pay where staff_id < pay_amount\p\g
+
+# OK : index based single table Ident comparisons
+
+select * from pay where staff_id = pay_amount \p\g
+
+
+# OK : some regex matching
+
+select * from staff where last_name CLIKE 'hu%'\p\g
+select * from staff where last_name CLIKE 'hu%%'\p\g
+select * from staff where last_name LIKE 'hu%'\p\g
+select * from staff where last_name LIKE 'Hu%'\p\g
+select * from staff where last_name LIKE '%Hu%'\p\g
+select * from staff where last_name RLIKE '[SJ].*'\p\g
+
+# ERR : regex on not char fields
+
+select * from pay where pay_date LIKE '%Feb%'\p\g
+select * from pay where pay_amount LIKE '%F%'\p\g
+select * from users where staff_id CLIKE '%F%'\p\g

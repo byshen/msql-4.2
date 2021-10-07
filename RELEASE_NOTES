@@ -1,0 +1,530 @@
+Release Notes and History
+-------------------------
+
+13 Apr 2019 mSQL 4.2
+------------
+
+* Added TABLE_INFO operator, msqlTableInfo() API call, and options to use
+  it in msqladmin and relshow.
+* Fixed bug in NOT regex row matches
+* Fixed bug in row matches using comparison between 2 base BYTE type columns
+  on huge indices).
+* Added "process hog" control for huge delete operations
+* Added limit operator to delete operations to allow clients to choose
+  how long to keep a table locked on huge deletes.  Repeating the same
+  delete query with a limit will delete sets of rows and eventually return
+  a 0 row count when there were no more to delete.
+* Fixed CopyDB to deal with the new hash based directory structure
+* Fixed some incorrect output in 'msql -q'
+
+
+
+30 Jun 2017 mSQL 4.1
+------------
+
+* Improved IPC file descriptor reliability in certain instances on Linux
+* Fixed issue resulting from ';' being aliased to '\g' in msql monitor
+* Resolved some issues with VM mapping under linux for the multi-process
+  "broker" based version of the daemon.
+* Rationailsed code duplication between msqld and msql_broker versions of
+  the daemon with more code being moved to a shared module.
+* Added restarter loop support to the broker based daemon.
+* Added extra code around child failure corner cases to ensure zombie
+  processes are never left behind the broker or restarter.
+* Fixed msqldump format issue when -c and -d given at the same time.
+
+
+
+7 Feb 2017 mSQL 4.0
+------------
+
+* Too many modifications to list.  The result of many years of use for
+  internal projects and products.
+
+
+
+1 Jun 2012 mSQL 3.11
+------------
+
+* Fixed issue with overflow data from TEXT fields in "SELECT INTO" queries
+* Added abilty to sort exports created via the export table API call
+* Added support for IPv6 and CIDR6 as native data types
+* Added ability to set the field delimiter character used in
+  "msqladmin export table" in the config file
+* Enforced 1MB CHAR field size limit to address possible DOS situation
+
+
+19 August 2011 mSQL 3.10
+------------
+
+* Added -q (Quiet Mode) to mSQL for bulk loads
+* Fixed file descriptor passing on 64-Bit FreeBSD (AMD64)
+* Fixed alignment issue with 64bit integer data fields
+* Fixed issues with unsinged 64bit integer indices
+* Fixed issues with 64bit integer conditional matching
+* Improved data syncing prior to server driven database duplication via the
+  "msqladmin copy" utility.
+
+
+17 February 2011 mSQL 3.9
+------------
+
+* Added support for on-load integrity checks for indices and data tables
+* Added server side table export option to msqladmin to allow export of
+  large data sets without pulling the data through the client-side API.
+* Added "system / system_has_swap" config setting to identify embedded
+  devices without swap space
+* Added "zero malloc" sorting option so that file backed VM is always used
+  rather than malloced space for table sorts when system_has_swap=0
+* Added checking for corruption in TEXT fields.
+* Fixed internal ACL handling for non-broker daemon
+* Portability fixes and 64-bit modifications for Ubuntu and OSX Snow Leopard
+
+
+9 June 2006 mSQL 3.8
+------------
+
+* Fixed handling of interrupted system calls on slow servers
+* Increase collumn buffer size in msqldump to mach max_fields in the server.
+* Fixed handling of TEXT field overflow buffers in distinct selects
+* Fixed optimiser bug where multiple references to the same indexed field
+  are included in the same condition series
+* Fixed sorting bug where data held in a secondary sort field completely
+  fills the field space and strcoll is used for a locale based comparison.
+
+
+8 May 2005 mSQL 3.7
+------------
+
+* Fixed compile time issue on some Linux distros
+* Fixed msqldump bug with specific INT types (thanks Norbert Gruener)
+* Fixed unsigned problems on small INT types
+* Fixed limitation found when performing an IDENT comparison between 2 fields
+  that are both from the inner table of a join
+
+
+
+
+21 December 2004  mSQL 3.6
+------------
+
+* Fixed compile time issue on SuSe linux
+* Added datetime data type
+* Added millitime data type (time with milliseconds)
+* Added millidatetime data type
+* Fixed range bounds on comparison with BYTE base type
+* Merged in index support for BYTE based types
+* Added API support for new date/time types
+* Completed port to Mac OS X
+* Row timestamp support fixed
+* Added support for sorting on variable length text fields
+* Added more aggressive cache flushing for AFS remote filesystems
+* Forced core dumps after bad signals even on systems that don't want to
+* Added configReloadFile() api call for refreshing the runtime config
+
+
+19 May 2004 mSQL 3.5
+------------
+
+* Fixed 64 bit issues on SPARC / Solaris 2.8
+* Fixed build isses for new yacc/bison installation
+* Unified the memory mapped region code
+* Fixed build isses for RedHat 9
+* Fixed timezone / GMT problem in msqlTimeToUnixTime()
+* Added tight spin detection in the main select loop if the kernel
+  keeps on interrupting the select() call.
+* Fixed bug in which an aborted client (SIGPIPE on con socket) would
+  cause a tight loop in the main select loop.  Many thanks to 
+  welberms AT cpunet.com.br for the help in finding and fixing this.
+* Fixed varargs/stdargs issues for gcc 3
+* Fixed order problems on sub 4 byte int types.
+
+
+
+14 January 2003 mSQL 3.4
+------------
+
+* Improved the parser error reporting
+
+* Added internal support for generic BYTE type representations.
+  This internal type is used as the basis for other types and
+  is not directly available.  It will be used for providing
+  efficient data storage of data types that do not map
+  directly onto an existing basic type.
+
+* Added a CIDR4 type for native storage of the 5 byte CIDR
+  IPv4 network prefix format.  Values such as '10.1.1.0/24'
+  can be provided as a native data value.
+
+* Added support for overloading the comparison operations for
+  specific types.  The comparison operators can now be redefined
+  to incorporate features that consider the semantics of a data
+  type during the comparison.
+
+* Added CIDR4 comparison overloads so that less than is evaluated
+  as 'less specific' and greater than is evaluated as 'more 
+  specific'  (see the CIDR specification for further details on
+  more / less specific CIDR definitions).
+
+* Fixed race condition that could result when returning large
+  data sets via the client/server protocol.
+
+* Added support for the OFFSET clause in SELECT queries.  This clause
+  is used to skip a certain number of rows in the result data set.
+  OFFSET can be used in conjunction with the LIMIT clause to provide
+  "Next n Rows of Data" result sets as are used by applications such
+  as Internet search engines (eg.  SELECT ...... LIMIT 10 OFFSET 20 ).
+
+* Enhanced the parser to that it accepts the reserved SQL words as
+  identifiers.  This is important as we add new reserved words (such
+  as the new OFFSET clause).  Databases with existing tables with a
+  field named offset would break as there would be no way to reference
+  that field (rejected in selects as it's now a reserved word).  Changes
+  to the set of reserved words can now be made without breaking any
+  existing applications.
+
+
+
+3 December 2002 mSQL 3.3
+------------
+
+* Previous 3.x releases have a bug that cause a query log to be
+  generated even if query logging is disabled.  Not only is that
+  a problem but it also slows down the server considerably.  The
+  problem is fixed and general query throughput has increased
+  significantly.
+
+* The readPacket code now only calls select if it needs to wait
+  for data.  If a non-blocking read returns EAGAIN then select
+  is called with a timeout value.  
+
+* Changed the parser's keyword hash table lookup routines for to
+  improve keyword lookup performance.
+
+* Fixed bug in msqldump that was producing incorrectly formatted
+  insert statements.
+
+* Fixed bug in typeGetTypeName() that produced a core dump in
+  certain error situations
+
+* Added support for an Update_Log.  If enabled, any query than modifies
+  the database in anyway is logged.  This is in contrast to the query
+  log that logs all queries, including selects.  See the config file
+  for details.
+
+* Plugged a couple more minor memory leaks.
+
+* Extended the regression test suite
+
+* Fixed error message returns for RLIKE and SLIKE on TEXT fields
+
+* Added support for "bulk inserts" using the folowing syntax :
+  insert into Table values (a, b, c) , (d, e, f) , (g, h, i)
+
+* Fixed a problem in the broker based backend that caused a server
+  crash if more than one backend was extending the overflow buffer
+  file used by TEXT fields.
+
+
+24 October 2002	mSQL 3.2
+------------
+
+* Bug Fix : Added the old TypeNames array for mSQL 2 compatability
+  when building PHP
+
+* Fixed query buffer memory leak in single process backend server
+
+* Fixed memory leak in handling of text_rep non char values such as
+  dates, times, and IP addresses.
+
+* Fixed leaked row buffer from table cache entry if the entry was
+  invalidated.
+
+* Fixed a leak in the value function code due to result values being
+  written over existing values in a multi-row result table
+
+* Fixed leak of ident structures on error return during query processing
+
+* Turned off stdio buffering on stdin, stdout, and and stream based
+  files used by the server (config file etc) as it was eating 80k of
+  memory for no benefit.
+
+* Many thanks to Doug Hardie for his help in tracking and testing
+  the memory leaks mentioned above.
+
+
+
+23 August 2002	mSQL 3.1
+------------
+
+* Bug Fix : Found and fixed problem that excluded the contents of TEXT
+  fields from results sets that were ORDERed or DISTINCTed
+
+* Bug Fix : Problem when ORDERing an empty result set fixed.
+
+* Modified the behaviour of date and time fields so that an empty value
+  is accepted and rewritten as a NULL.
+
+* Fixed problem with "make install" looking for the old demos
+
+
+
+30 July 2002	mSQL 3.0 RELEASE
+------------
+
+* Bug Fix: Found and fixed 2 places in the source that could result in 
+  a read beyond the end of a buffer undr certain situations
+
+* Portability: The broker's internal message structure definition was
+  conflicitng with a system defined structure of the same name under
+  AIX.  The broker related structures have been renamed to resolve this
+  conflict. 
+
+* Reintroduced the TCP/IP based access code to the single-process
+  back-end.
+
+
+
+28 May 2002	mSQL 3.0 Pre-Release 5
+-----------
+
+* Added configurable max memory use limits for sorting etc so that the
+  memory footprint of the backend can be further tuned for small or
+  embedded systems.
+
+* Dynamic memory handling is now in it's own module providing a
+  consistent approach to the allocation and deallocation of dynamic
+  structures.
+
+* Caching of all dynamically allocated structures has been added.
+  Reduced calls to malloc and free has improved performance by up to 20%
+  depending on the types of queries being executed.
+
+* Found and isolated some repetitive and wasted scanning of the field
+  list when processing a delete query (repeated searching for text
+  fields).  The list is now scanned only once providing a significant
+  performance increase when doing large deletions.
+
+* Removed file locking overhead for the single process server as it
+  doesn't need it.  A server config flag now enables or disables the
+  internal file locking code.
+
+* Bug Fix : Problem with connection limit counting identified and fixed
+  in the single process server.
+
+* Bug Fix : In some situations the size of an internal structure would
+  not be the same in all modules causing memory boundary related errors.
+
+* Bug Fix : Found and fixed a problem with deletion when using a index
+  range comparison (cra reset couldn't handle range tests).
+
+* Bug Fix : Found and fixed a bug in the varchar code that could cause
+  a core dump when performaing regular expression matching against text
+  fields in certain situations.
+
+
+
+9 May 2002	mSQL 3.0 Pre-Release 4.1
+----------
+
+* Immediate sub release!  Issues identified if union index code is
+  triggered when operating on a range based index match.  UIDX code
+  disabled in this release which investigation continues.
+
+
+7 May 2002	mSQL 3.0 Pre-Release 4
+----------
+
+* Further modularised the engine.  Many pieces of internal data have now
+  been moved into a new server struct that is passed around during query
+  processing.
+
+* Split the driver daemon functionality into two drivers - a single
+  process daemon (msql3d) and the original process farm daemon (msql3_broker).
+  The broker based engine is not suitable for embedded devices or small
+  computing environments.
+
+* Completed index range support by adding range use for < <= > and >=
+  conditions if applied to an index.
+
+* Moved the size specification of the table cache into the config file.
+  This allows some aspects of the memory use to be fine-tuned on smaller
+  or embedded systems.  The default value is 8 and any value >= 2 can
+  be used. 
+
+* Standardised the handling of empty values as literals for date/time type
+  fields.  An attempt to insert an empty value (using a value of '') will
+  result in an error.
+
+* Support for 8, 16, 32, and 64 bit sugned and unsigned integers now 
+  available via the int8 int16 int32 int64 and the uint equiv of each.
+
+* Extended the error handling to report both invalid type and integer`
+  value range problems for literals and conditions.
+
+* Added testing for small int/uint values and range conditions to the
+  regression test
+
+* Bug Fix : Double free causing system warnings on FreeBSD.  Could have caused
+  unstable operation on some platforms.
+
+
+
+
+4 Sep 2001	mSQL 3.0 Pre-Release 3
+----------
+
+* Bug Fix : associated with the creation and handling of temporary table
+  field lists.  This had an impact on ordering or distincting in that
+  all values returned might have been NULL values.
+
+* Bug Fix : on systems that provide strcoll, char field comparisons
+  where every character of the fields was filled with data (i.e. 5 chars
+  in a char(5) field) would fail.
+
+* Ported to MacOS X.  It builds and maily runs although it appears that
+  X's mmap implementation is more than a little strange.  Things like
+  having a kenrel entry for msync although if you call it you get
+  an unimplemented system call error.  Also shared read/write of
+  regions doesn't work properly (write in one process cannot be seen
+  via a read in another process).
+
+* Support for 64 bit integer values is now available via the int64 field
+  type on platforms that provide either a "long long" or "__uint64_t"
+  data type
+
+* Added non-blocking lock on PID file to ensure multiple brokers are not
+  active at the same time. 
+
+* Bug Fix : Fixed value comparisons between int/uint/money/real etc.
+
+* Bug Fix : Fixed possible overflow free list corruption problem
+
+* Bug Fix : Fixed AVL tree problem if a tree extension ran out of disk space
+
+* Security : Add URL sanitiser to w3-auth based access control
+
+
+
+===========================================================================
+
+5 Apr 2001	mSQL 3.0 Pre-Release 2
+----------
+
+***** NOTE ********
+* You must recreate your 3.0 database when moving to this release!
+* If you have existing 3.0 database please dump them BEFORE you upgrade
+* your installation.
+*******************
+
+* Fixed bug in determination of field offsets and field_id's in 
+  utilSetupFields that resulted in a core dump in some situations
+
+* Fixed bug in NULL field handling that was causing core dumps
+
+* Fixed bug in type recognition in msqldump
+
+* Support for LIKE and CLIKE operations on TEXT fields (variable length
+  character fields) added
+
+* Fixed handling of function results in tmp tables (such as sorting a
+  result table that includes the output of a function as a field).
+
+
+
+===========================================================================
+
+
+20 Feb 2001	mSQL 3.0 Pre-Release 1
+-----------
+
+The first pre-release of the 3.0 code base is now available to the public.
+This release contains the key architectural changes to the database
+engine itself as well as some of the new functionality to be included
+in the 3.0 production code.
+
+
+* Core Architecture.
+
+The core of the database engine has been redesigned to allow multiple
+queries to be processed simultaneously.  In previous versions, if
+multiple queries were recevied, they were queued and processed
+sequentially.  The design is a "process farm" scheme with a "broker
+process" responsible for the coordination of state changes within the
+cluster.  The number of processes available to process queries can be set
+using the Num_Children entry in the configuration file.
+
+* Internal Data Encapsulation.
+
+The internals of the engine have been redesigned to ensure that all
+information pertaining to a query are encapsulated within a single data
+structure.  This is required if sub-queries are to be supported.  The
+framework exists in this pre-release and full support for sub-queries
+will be included in a later pre-release of the 3.0 code.
+
+* Code Structure.
+
+The entire source code tree has been audited and restructured into 
+functional modules.  The result has been not only better code structure
+but an increase in the reliability of the software.
+
+* Index Handling.
+
+The index module (CRA) has been extended to support index range lookups.
+Until now, the query optimiser would only use an index if the
+conditional test against that index was an equality test.  The new
+module will also utilise the index for conditions that result in a
+range of values.  Currently, range support is limited to the BETWEEN
+operator but will be extended to include less-than and greater-than 
+conditions in the next pre-release.  An example of the syntax is shown
+below.
+	SELECT last_name FROM staff WHERE staff_id BETWEEN 1 AND 10 
+
+* Result Tables.
+
+Support has been added for the SELECT INTO construct.  This allows the
+result of a query to be stored in a new table.  An example of the syntax
+is shown below.  Naturally the target table must not exist prior to the
+execution of the query.
+
+	SELECT first_name, last_name INTO names FROM staff
+
+* SQL Functions.
+
+The framework for supporting functions within queries has been added.
+At this stage, only value functions are supported, not aggregate
+functions (e.g. UPPER(first_name) is supported but COUNT(*) is not).
+Also, functions are only currently supported on select fields, not in
+conditions.  Support for functions within conditions and aggregate
+functions will be added in the coming pre-releases.  The standard SQL
+functions currently supported are
+
+	String related : 	UPPER( )
+				LOWER( )
+				LENGTH( )
+				SUBSTR( )
+				TRANSLATE( )
+				REPLATE( )
+				SOUNDEX( )
+
+	Number related :	ABS( )
+				CEIL( )
+				FLOOR( )
+				MOD( )
+				SIGN( )
+				POWER( )
+
+
+* Extra Types.
+
+More native data types are being added.  Support for IP Addresses (IPv4
+type) has been added.  Further types will be added in the future.  An
+example use of the IPv4 type is shown below.
+
+	select * from hosts where addr = '10.0.0.1'
+
+* Misc Changes.
+
+The default installation of the software has been changed to reflect the
+new code series.  The software is now installed in /usr/local/msql3 by
+default.

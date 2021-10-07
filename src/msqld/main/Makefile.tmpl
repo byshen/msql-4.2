@@ -1,0 +1,50 @@
+
+EXTRA_CFLAGS= -DTARGET='"$(TARGET)"' -DINST_DIR=\\"$(INST_DIR)\\"
+MSQLD_OBJS= yaccer.o lexer.o parse.o process.o index.o table.o regex.o select.o sysvar.o varchar.o compare.o distinct.o acl.o sort.o cache.o util.o net.o tcp.o funct.o main_common.o main.o main_broker.o
+
+all: $(MSQLD_OBJS)
+
+YACC_FLAGS= -d
+
+!yacc yaccer.y
+
+!object lexer.o lexer.c
+!object parse.o parse.c
+!object process.o process.c
+!object index.o index.c
+!object table.o table.c
+!object regex.o regex.c
+!object select.o select.c
+!object sysvar.o sysvar.c
+!object varchar.o varchar.c
+!object compare.o compare.c
+!object distinct.o distinct.c
+!object acl.o acl.c 
+!object sort.o sort.c 
+!object cache.o cache.c 
+!object util.o util.c 
+!object net.o net.c 
+!object funct.o funct.c 
+!object memory.o memory.c 
+!object tcp.o tcp.c 
+!object main_common.o main_common.c 
+!object main.o main.c 
+!object main_broker.o main_broker.c 
+
+
+
+!program msqld yaccer.o,lexer.o,parse.o,process.o,index.o,table.o,regex.o,select.o,sysvar.o,varchar.o,compare.o,distinct.o,acl.o,sort.o,cache.o,util.o,net.o,main_common.o,main.o,funct.o,memory.o,tcp.o,../../common/debug/debug.o,../../common/config/config.o,../../common/libc_stuff/strtoul.o,../../common/libc_stuff/tmpnam.o,../regexp/libregexp.a,../index/libidx.a,../../common/types/libtypes.a,../broker/libbroker.a,../cra/libcra.a,../lock/liblock.a,../../libmsql/libmsql.a
+
+!program msql_broker yaccer.o,lexer.o,parse.o,process.o,index.o,table.o,regex.o,select.o,sysvar.o,varchar.o,compare.o,distinct.o,acl.o,sort.o,cache.o,util.o,net.o,main_common.o,main_broker.o,funct.o,memory.o,tcp.o,../../common/debug/debug.o,../../common/config/config.o,../../common/libc_stuff/strtoul.o,../../common/libc_stuff/tmpnam.o,../regexp/libregexp.a,../index/libidx.a,../../common/types/libtypes.a,../broker/libbroker.a,../cra/libcra.a,../lock/liblock.a,../../libmsql/libmsql.a
+
+!install msqld $(INST_DIR)/bin/msqld 0755
+
+!install msql_broker $(INST_DIR)/bin/msql_broker 0755
+
+
+clean::
+	rm -f *.o *core msqld msql_broker lextest
+
+lextest :: lexer.c
+	$(CC) $(CC_FLAGS) -DDEBUG lexer.c memory.o -o lextest
+

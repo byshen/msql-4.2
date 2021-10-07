@@ -1,0 +1,139 @@
+
+Welcome to the miniSQL monitor.  Type \h for help.
+
+
+mSQL >     -> 
+Query buffer
+------------
+
+create table datetime(v1 datetime)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+create index idx1 on datetime(v1)
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+INSERT INTO datetime  VALUES ('26-Jun-2004 15:16:19')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO datetime  VALUES ('02-Dec-1999 23:10:00')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO datetime  VALUES ('06-Feb-2004 01:01:01')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO datetime  VALUES ('02-Dec-1999 23:09:50')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL > 
+Query buffer
+------------
+INSERT INTO datetime  VALUES ('25-Jun-2004 11:22:33')
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from datetime order by v1
+[continue]
+    -> 
+Query OK.  5 row(s) modified or retrieved.
+
+ +----------------------+
+ | v1                   |
+ +----------------------+
+ | 02-Dec-1999 23:09:50 |
+ | 02-Dec-1999 23:10:00 |
+ | 06-Feb-2004 01:01:01 |
+ | 25-Jun-2004 11:22:33 |
+ | 26-Jun-2004 15:16:19 |
+ +----------------------+
+
+
+
+mSQL > 
+Query buffer
+------------
+select * from datetime where v1 = '06-Feb-2004 01:01:01'
+[continue]
+    -> 
+Query OK.  1 row(s) modified or retrieved.
+
+ +----------------------+
+ | v1                   |
+ +----------------------+
+ | 06-Feb-2004 01:01:01 |
+ +----------------------+
+
+
+
+mSQL >     -> 
+Query buffer
+------------
+select * from datetime where v1 between '01-Jan-1999 00:00:00'
+	and '31-Dec-1999 23:59:59'
+[continue]
+    -> 
+Query OK.  2 row(s) modified or retrieved.
+
+ +----------------------+
+ | v1                   |
+ +----------------------+
+ | 02-Dec-1999 23:09:50 |
+ | 02-Dec-1999 23:10:00 |
+ +----------------------+
+
+
+
+mSQL > 
+Bye!
+

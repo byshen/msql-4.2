@@ -1,0 +1,8 @@
+
+all: liblock.a
+
+!library_unix liblock.a ipc_lock.c,file_lock.c
+
+
+ipc_lock.c: lock.h
+file_lock.c: lock.h

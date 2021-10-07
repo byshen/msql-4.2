@@ -1,0 +1,7 @@
+
+!object msqldump.o msqldump.c
+
+
+!program msqldump msqldump.o,../libmsql/libmsql.a
+!install msqldump $(INST_DIR)/bin/msqldump 0755
+
